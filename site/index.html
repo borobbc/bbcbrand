@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BBC BRAND — магазин</title>
+<meta name="description" content="BBC BRAND — магазин. Картхолдеры с серебряным тиснением: чёрный, бордовый, белый. Доставка Новой Почтой по Украине.">
+<meta name="theme-color" content="#0a0a0b">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#0a0a0a; --bg2:#111213; --card:#151617; --line:#26282a; --onyx:#353839;
+  --text:#f2f2f3; --muted:#9a9ca0; --dim:#6d6f73;
+  --silver:linear-gradient(100deg,#8e9095 0%,#f4f5f6 35%,#a7a9ad 55%,#eceef0 78%,#9a9ca1 100%);
+  --ok:#7fd99a; --warn:#e7c46a; --bad:#ef6b6b;
+  --r:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.silver{background:var(--silver);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo-b{width:34px;height:28px;background:var(--silver);-webkit-mask:url(img/logo.png) center/contain no-repeat;mask:url(img/logo.png) center/contain no-repeat}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(10,10,11,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-name{font-weight:800;letter-spacing:.16em;font-size:15px;white-space:nowrap}
+.nav-links{display:flex;gap:6px;align-items:center}
+.nav-links a,.nav-links button{background:none;border:0;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.06em;color:var(--muted);padding:10px 12px;border-radius:10px;min-height:44px;display:inline-flex;align-items:center;gap:8px}
+.nav-links a:hover,.nav-links button:hover{color:var(--text);background:#17181a}
+.tg-btn{border:1px solid var(--line)!important;color:var(--text)!important}
+@media (max-width:720px){.nav-links .hide-m{display:none}.brand-name{font-size:13px;letter-spacing:.12em}}
+
+/* hero */
+.hero{position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-top:64px;padding-bottom:72px}.hero-grid>*{min-width:0}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;letter-spacing:.28em;color:var(--muted);text-transform:uppercase}
+.eyebrow i{width:28px;height:1px;background:var(--onyx)}
+.hero h1{margin:18px 0 18px;font-size:clamp(44px,7vw,92px);line-height:.98;font-weight:800;letter-spacing:.02em;text-wrap:balance}
+.hero p.lead{margin:0 0 30px;color:var(--muted);font-size:17px;max-width:520px;text-wrap:pretty}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:14px;border:1px solid transparent;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:transform .15s,background .2s,border-color .2s}
+.btn:active{transform:scale(.98)}
+.btn-silver{background:var(--silver);color:#0b0b0c}
+.btn-silver:hover{filter:brightness(1.06)}
+.btn-ghost{background:transparent;border-color:var(--onyx);color:var(--text)}
+.btn-ghost:hover{background:#151617}
+.btn[disabled]{opacity:.45;cursor:not-allowed;filter:grayscale(1)}
+.hero-drop{margin-top:26px;display:none;align-items:center;gap:14px;padding:12px 16px;border:1px solid var(--onyx);border-radius:14px;background:#111213;width:max-content;max-width:100%}
+.hero-drop.on{display:inline-flex}
+.hero-drop .t{font-variant-numeric:tabular-nums;font-weight:800;font-size:20px;letter-spacing:.06em}
+.hero-drop small{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.phone{position:relative;justify-self:center;width:min(380px,100%);aspect-ratio:9/16;background:var(--bg)}
+.phone video{width:100%;height:100%;object-fit:cover}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr;padding-top:36px;padding-bottom:48px;gap:34px}.phone{width:min(320px,86vw)}}
+
+/* sections */
+section{padding:84px 0}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:34px;flex-wrap:wrap}
+.sec-head h2{margin:10px 0 0;font-size:clamp(30px,4vw,46px);font-weight:800;letter-spacing:.02em;line-height:1.05}
+.sec-head p{margin:0;color:var(--muted);max-width:420px}
+
+/* catalog */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+.prod{position:relative;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:0;overflow:hidden;transition:transform .25s,border-color .25s}
+.prod:hover{transform:translateY(-4px);border-color:var(--onyx)}
+.prod .ph{aspect-ratio:4/5;background:#efeeeb;overflow:hidden}
+.prod .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.prod:hover .ph img{transform:scale(1.04)}
+.prod .info{padding:18px 18px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.prod h3{margin:0;font-size:16px;font-weight:700;letter-spacing:.02em}
+.prod .price{font-weight:800;font-size:16px;white-space:nowrap}
+.prod .sub{color:var(--muted);font-size:13px;margin-top:2px}
+.badge{position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(10,10,11,.82);backdrop-filter:blur(8px);font-size:12px;font-weight:700;letter-spacing:.06em}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--dim)}
+.st-in .dot{background:var(--ok);box-shadow:0 0 0 4px rgba(127,217,154,.15)}
+.st-out .dot{background:var(--bad)}
+.st-drop .dot{background:var(--warn);animation:pulse 1.4s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(231,196,106,.12)}}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* features */
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.feat div{background:var(--bg2);padding:26px 22px}
+.feat svg{width:26px;height:26px;margin-bottom:14px}
+.feat b{display:block;font-size:15px;margin-bottom:6px}
+.feat span{color:var(--muted);font-size:13px}
+@media (max-width:860px){.feat{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.feat{grid-template-columns:1fr}}
+
+.how{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:s}
+.how div{border:1px solid var(--line);border-radius:var(--r);padding:22px;background:var(--card)}
+.how div::before{counter-increment:s;content:"0" counter(s);display:block;font-weight:800;font-size:28px;margin-bottom:10px;background:var(--silver);-webkit-background-clip:text;background-clip:text;color:transparent}
+.how b{display:block;margin-bottom:6px}
+.how span{color:var(--muted);font-size:14px}
+@media (max-width:860px){.how{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.how{grid-template-columns:1fr}}
+
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+.qbtn{display:flex;align-items:center;gap:16px;min-height:96px;padding:18px 20px;border-radius:var(--r);border:1px solid var(--line);background:var(--card);text-align:left;transition:transform .2s,border-color .2s,background .2s}
+.qbtn:hover{transform:translateY(-3px);border-color:var(--onyx);background:#18191b}
+.qbtn .c{width:52px;height:52px;border-radius:50%;flex:none;border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 -8px 16px rgba(0,0,0,.35),inset 0 6px 10px rgba(255,255,255,.12)}
+.qbtn b{display:block;font-size:17px}
+.qbtn small{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;margin-top:2px}
+.qbtn .arr{margin-left:auto;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;flex:none}
+.tgcta{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:30px;border-radius:var(--r);border:1px solid var(--onyx);background:radial-gradient(120% 140% at 0% 0%,#1d1f21 0%,#0f1011 60%);text-decoration:none}
+.tgcta b{display:block;font-size:clamp(22px,3vw,30px);margin:10px 0 6px;line-height:1.15}
+.tgsub{color:var(--muted);font-size:14px}
+@media (max-width:860px){.quick{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--line);padding:36px 0 50px;color:var(--muted);font-size:13px}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+.foot .links{display:flex;gap:6px;flex-wrap:wrap}
+.foot button,.foot a{background:none;border:0;color:var(--muted);text-decoration:none;padding:10px;min-height:44px}
+.foot button:hover,.foot a:hover{color:var(--text)}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(6px)}
+.modal.open{display:flex;animation:fade .2s}
+@keyframes fade{from{opacity:0}}
+.sheet{position:relative;width:min(1000px,100%);max-height:calc(100vh - 40px);overflow:auto;background:var(--bg2);border:1px solid var(--line);border-radius:24px;animation:up .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes up{from{transform:translateY(24px);opacity:0}}
+.x{position:absolute;top:12px;right:12px;z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(10,10,11,.7);display:grid;place-items:center}
+.x svg{width:18px;height:18px}
+.pm{display:grid;grid-template-columns:1fr 1fr}
+.pm .media{position:relative;background:#efeeeb;min-height:420px}
+.pm .media img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}
+.chip3d{position:absolute;right:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:0;background:#0b0b0c;color:#fff;font-weight:800;letter-spacing:.12em;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.chip3d svg{width:18px;height:18px}
+.chip3d:hover{background:#1b1c1e}
+.pm .body{padding:34px 30px 30px;display:flex;flex-direction:column;gap:18px}
+.pm h3{margin:0;font-size:28px;font-weight:800;line-height:1.1}
+.pm .desc{color:var(--muted);margin:0;font-size:15px}
+.label{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.sw{display:flex;gap:12px;margin-top:10px}
+.sw button{width:48px;height:48px;border-radius:50%;border:2px solid transparent;padding:4px;background:none}
+.sw button span{display:block;width:100%;height:100%;border-radius:50%;border:1px solid rgba(255,255,255,.15)}
+.sw button[aria-pressed="true"]{border-color:#e8e9ea}
+.stline{display:flex;align-items:center;gap:10px;font-weight:700}
+.stline .dot{width:10px;height:10px}
+.bigprice{font-size:30px;font-weight:800}
+.countdown{display:flex;gap:8px}
+.countdown div{min-width:64px;padding:10px 8px;border:1px solid var(--onyx);border-radius:12px;text-align:center;background:#0d0e0f}
+.countdown b{display:block;font-size:24px;font-variant-numeric:tabular-nums}
+.countdown small{color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.note{font-size:13px;color:var(--muted)}
+.note button{background:none;border:0;padding:0;text-decoration:underline;color:var(--text)}
+@media (max-width:820px){.pm{grid-template-columns:1fr}.pm .media{min-height:0;aspect-ratio:4/5}.pm .body{padding:24px 20px}.modal{padding:0;align-items:flex-end}.sheet{border-radius:22px 22px 0 0;max-height:94vh}}
+
+/* form */
+form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:480px){form .row{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.field label{font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--muted)}
+.field input,.field textarea{width:100%;min-height:48px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#0c0d0e;color:var(--text);font:inherit;font-size:16px;outline:none;transition:border-color .2s}
+.field input:focus,.field textarea:focus{border-color:#8e9095}
+.field input.err{border-color:var(--bad)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin:6px 0 16px}
+.check input{width:20px;height:20px;margin:1px 0 0;accent-color:#d9dadc;flex:none}
+.summary{display:flex;align-items:center;gap:14px;padding:12px;border:1px solid var(--line);border-radius:14px;margin-bottom:16px;background:#0d0e0f}
+.summary img{width:64px;height:64px;object-fit:cover;border-radius:10px}
+.formerr{color:var(--bad);font-size:13px;min-height:18px;margin-bottom:8px}
+.ok-box{text-align:center;padding:10px 0}
+.ok-box .num{font-size:30px;font-weight:800;margin:8px 0}
+.pay{white-space:pre-wrap;text-align:left;border:1px dashed var(--onyx);border-radius:14px;padding:16px;background:#0d0e0f;font-size:14px}
+
+/* rules */
+.rules{padding:40px 34px;max-width:820px}
+.rules h3{font-size:30px;margin:0 0 6px}
+.rules h4{margin:28px 0 8px;font-size:16px;letter-spacing:.04em}
+.rules p,.rules li{color:#c8c9cc;font-size:14.5px}
+.rules ul{padding-left:20px;margin:6px 0}
+.rules .upd{color:var(--dim);font-size:13px}
+@media (max-width:600px){.rules{padding:30px 20px}}
+
+/* 3D */
+.v3d{width:min(900px,100%);background:radial-gradient(ellipse at 50% 40%,#232527 0%,#0b0b0c 70%)}
+.stage{height:min(70vh,560px);display:grid;place-items:center;perspective:1300px;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.stage:active{cursor:grabbing}
+.obj{position:relative;width:340px;height:230px;transform-style:preserve-3d}
+.face{position:absolute;left:0;top:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;overflow:hidden}
+.face img{width:100%;height:100%;object-fit:cover}
+.f-front,.f-back{width:340px;height:230px}
+.f-front{transform:translateZ(5px)}
+.f-back{transform:rotateY(180deg) translateZ(5px)}
+.edge{position:absolute;backface-visibility:visible;border-radius:2px}
+.e-l,.e-r{width:10px;height:218px;top:6px}
+.e-l{left:-5px;transform:rotateY(-90deg)}
+.e-r{left:335px;transform:rotateY(90deg)}
+.e-t,.e-b{width:328px;height:10px;left:6px}
+.e-t{top:-5px;transform:rotateX(90deg)}
+.e-b{top:225px;transform:rotateX(-90deg)}
+.gloss{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:.9}
+.shadow3d{position:absolute;left:50%;top:calc(50% + 170px);width:320px;height:40px;margin-left:-160px;background:radial-gradient(closest-side,rgba(0,0,0,.65),transparent);filter:blur(6px);pointer-events:none}
+.v3d-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px 20px;flex-wrap:wrap}
+.v3d-bar .hint{color:var(--muted);font-size:13px;display:flex;align-items:center;gap:8px}
+.scaler{transform:scale(1.3);transform-style:preserve-3d}@media (max-width:700px){.scaler{transform:scale(.85)}}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:#f2f2f3;color:#0b0b0c;font-weight:700;padding:14px 18px;border-radius:14px;z-index:80;transition:transform .3s;font-size:14px;max-width:calc(100% - 40px)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="BBC BRAND — на главную">
+      <span class="logo-b" aria-hidden="true"></span>
+      <span class="brand-name silver">BBC BRAND</span>
+    </a>
+    <nav class="nav-links" aria-label="Меню">
+      <a class="hide-m" href="#catalog">Каталог</a>
+      <a class="hide-m" href="#delivery">Доставка</a>
+      <a class="tg-btn" href="https://t.me/bbcbrand" target="_blank" rel="noopener" aria-label="Telegram @bbcbrand">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 4.5 2.8 11.7c-.9.4-.9 1 .1 1.3l4.6 1.4 1.8 5.4c.2.6.4.7.9.3l2.6-2.2 4.9 3.6c.8.5 1.3.2 1.5-.7L22.6 5.6c.3-1.2-.3-1.6-1.1-1.1z"/><path d="m7.5 14.4 9.8-6.2"/></svg>
+        <span class="hide-m">@bbcbrand</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" style="padding:0">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><i></i>магазин<i></i></span>
+        <h1><span class="silver">BBC</span><br>BRAND</h1>
+        <p class="lead">Сейчас в продаже — картхолдеры с фактурой «под крокодила» и серебряным тиснением в трёх цветах. Доставка Новой Почтой по всей Украине.</p>
+        <div class="cta">
+          <a class="btn btn-silver" href="#catalog">Смотреть каталог</a>
+          <a class="btn btn-ghost" href="https://t.me/bbcbrand" target="_blank" rel="noopener">Telegram</a>
+        </div>
+        <div class="hero-drop" id="heroDrop" role="status">
+          <span class="dot" style="background:var(--warn)"></span>
+          <div><small id="heroDropLabel">Дроп через</small><div class="t" id="heroDropT">00:00:00</div></div>
+        </div>
+      </div>
+      <div class="phone" aria-hidden="true">
+        <video id="promo" src="img/promo.mp4" poster="img/promo-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="eyebrow"><i></i>каталог</span><h2>Выбери свой цвет</h2></div>
+        <p>Нажми на картхолдер, чтобы посмотреть его ближе, покрутить в 3D и оформить заказ.</p>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section id="delivery" style="padding-top:0">
+    <div class="wrap">
+      <div class="feat">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="#d9dadc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg><b>Новая Почта</b><span>Отправка в отделение или почтомат по всей Украине</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="#d9dadc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>1–3 рабочих дня</b><span>Отправляем после подтверждения оплаты и присылаем ТТН</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="#d9dadc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg><b>Предоплата 100%</b><span>Реквизиты появятся сразу после оформления заказа</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="#d9dadc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><b>Поддержка</b><span>Ответим на вопросы в Telegram @bbcbrand</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <a class="tgcta" href="https://t.me/bbcbrand" target="_blank" rel="noopener">
+        <div>
+          <span class="eyebrow"><i></i>telegram</span>
+          <b>Дропы и новинки — первыми в канале</b>
+          <span class="tgsub">Анонсы, таймеры и новые товары BBC BRAND</span>
+        </div>
+        <span class="btn btn-silver">Подписаться @bbcbrand</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div style="display:flex;align-items:center;gap:12px"><span class="logo-b" aria-hidden="true"></span><span>© <span id="yr"></span> BBC BRAND</span></div>
+    <div class="links">
+      <a href="#delivery">Доставка</a>
+      <a href="https://t.me/bbcbrand" target="_blank" rel="noopener">Telegram @bbcbrand</a>
+    </div>
+  </div>
+</footer>
+
+<!-- product modal -->
+<div class="modal" id="pModal" role="dialog" aria-modal="true" aria-labelledby="pTitle">
+  <div class="sheet">
+    <button class="x" type="button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="pm">
+      <div class="media">
+        <img id="pImg" src="img/black.jpg" alt="">
+        <button class="chip3d" type="button" id="open3d" aria-label="Открыть 3D-модель"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></svg>3D</button>
+      </div>
+      <div class="body" id="pBody"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 3D modal -->
+<div class="modal" id="m3d" role="dialog" aria-modal="true" aria-label="3D-модель картхолдера">
+  <div class="sheet v3d">
+    <button class="x" type="button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="stage" id="stage">
+      <div class="scaler"><div class="obj" id="obj">
+        <div class="face f-front"><img id="tFront" src="img/black-front.jpg" alt="" draggable="false"><div class="gloss" id="glossF"></div></div>
+        <div class="face f-back"><img id="tBack" src="img/black-back.jpg" alt="" draggable="false"><div class="gloss" id="glossB"></div></div>
+        <div class="edge e-l"></div><div class="edge e-r"></div><div class="edge e-t"></div><div class="edge e-b"></div>
+      </div></div>
+      <div class="shadow3d" aria-hidden="true"></div>
+    </div>
+    <div class="v3d-bar">
+      <span class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11V9.5a1.5 1.5 0 0 1 3 0V12M14 11.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.7-2.3L3.5 16a1.6 1.6 0 0 1 2.4-2L8 15.5"/></svg>Тяни, чтобы покрутить</span>
+      <div class="sw" id="sw3d" role="group" aria-label="Цвет 3D-модели" style="margin:0"></div>
+    </div>
+  </div>
+</div>
+
+<!-- rules modal -->
+<div class="modal" id="rModal" role="dialog" aria-modal="true" aria-labelledby="rTitle">
+  <div class="sheet" style="width:min(860px,100%)">
+    <button class="x" type="button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <article class="rules">
+      <h3 id="rTitle">Правила магазина</h3>
+      <div class="upd">BBC BRAND · Telegram @bbcbrand</div>
+
+      <h4>1. Общие положения</h4>
+      <p>Оформляя заказ на сайте, покупатель подтверждает, что ознакомился с этими правилами и полностью с ними согласен. Магазин оставляет за собой право изменять правила, цены и условия доставки без предварительного уведомления. Действуют правила, опубликованные на сайте на момент оформления заказа.</p>
+
+      <h4>2. Оформление заказа</h4>
+      <ul>
+        <li>Для заказа нужно указать фамилию, имя, номер телефона, город и номер отделения или почтомата Новой Почты.</li>
+        <li>Покупатель несёт полную ответственность за правильность указанных данных. Если посылка ушла не туда из-за ошибки в данных, повторная отправка оплачивается покупателем.</li>
+        <li>Заказ считается подтверждённым только после поступления оплаты. Неоплаченный заказ может быть отменён без уведомления.</li>
+        <li>Магазин вправе отказать в оформлении заказа без объяснения причин. В этом случае оплаченные средства возвращаются в полном объёме.</li>
+      </ul>
+
+      <h4>3. Оплата</h4>
+      <ul>
+        <li>Работаем по 100% предоплате. Реквизиты для оплаты показываются сразу после оформления заказа на сайте.</li>
+        <li>После оплаты обязательно отправьте скрин или квитанцию в Telegram <b>@bbcbrand</b> и укажите номер заказа.</li>
+        <li>Магазин не несёт ответственности за денежные средства, отправленные по реквизитам, полученным не с этого сайта и не из официального Telegram-канала @bbcbrand. Мы никогда не просим оплату через третьих лиц.</li>
+        <li>Магазин не несёт ответственности за ошибки при переводе (неверный номер карты, неверная сумма), задержки зачисления и комиссии банков и платёжных систем.</li>
+        <li>При ошибочной оплате покупатель самостоятельно обращается в свой банк для возврата средств.</li>
+      </ul>
+
+      <h4>4. Доставка</h4>
+      <ul>
+        <li>Доставка осуществляется Новой Почтой по Украине в отделение или почтомат.</li>
+        <li>Отправка — в течение 1–3 рабочих дней после подтверждения оплаты. Номер ТТН мы отправляем покупателю.</li>
+        <li>Стоимость доставки оплачивается получателем по тарифам Новой Почты при получении посылки.</li>
+        <li>Сроки доставки зависят от Новой Почты. Магазин не несёт ответственности за задержки, утерю или повреждение посылки по вине перевозчика — после передачи посылки перевозчику ответственность за её сохранность несёт перевозчик.</li>
+        <li>Проверяйте посылку при получении в отделении. Претензии по внешнему повреждению упаковки оформляются на месте с сотрудником Новой Почты.</li>
+        <li>Если посылку не забрали в срок хранения и она вернулась, повторная отправка оплачивается покупателем, а стоимость обратной доставки удерживается из суммы при возврате денег.</li>
+      </ul>
+
+      <h4>5. Возврат и обмен</h4>
+      <ul>
+        <li>Вернуть или обменять товар надлежащего качества можно в течение 14 дней с момента получения, если он не был в использовании, сохранены товарный вид, тиснение и упаковка.</li>
+        <li><b>Стоимость доставки при возврате и обмене полностью оплачивает покупатель</b> — в обе стороны. Посылки с наложенным платежом и без предварительного согласования не принимаются.</li>
+        <li>Перед возвратом обязательно напишите нам в Telegram @bbcbrand и согласуйте возврат.</li>
+        <li>Деньги возвращаются за вычетом стоимости доставки в течение 7 рабочих дней после того, как мы получим и проверим товар.</li>
+        <li>Если обнаружен заводской брак, сообщите нам в течение 3 дней после получения с фото или видео — заменим товар или вернём деньги после проверки.</li>
+        <li>Не являются браком: фактура и рисунок материала, незначительные отличия в расположении тиснения, лёгкий запах нового изделия, отличие оттенка из-за настроек экрана.</li>
+      </ul>
+
+      <h4>6. Товар и фото</h4>
+      <p>Цвет и оттенок товара на фото и в 3D-модели могут немного отличаться от реального из-за освещения и настроек экрана. Это не является основанием для возврата как брака. Каждый картхолдер может иметь небольшие отличия в фактуре.</p>
+
+      <h4>7. Дропы и наличие</h4>
+      <ul>
+        <li>Количество товара ограничено. Таймер на сайте показывает время до открытия продаж (дропа).</li>
+        <li>Товар закрепляется за покупателем только после оплаты. Оформление заказа без оплаты не гарантирует бронь.</li>
+        <li>Если товар закончился, пока заказ ожидал оплату, мы свяжемся с вами и предложим другой цвет или вернём деньги в полном объёме.</li>
+      </ul>
+
+      <h4>8. Ответственность</h4>
+      <ul>
+        <li>Магазин не несёт ответственности за ущерб, возникший из-за неправильного использования или хранения товара.</li>
+        <li>Магазин не несёт ответственности за невозможность связаться с покупателем из-за неверно указанных контактов.</li>
+        <li>Магазин не несёт ответственности за действия третьих лиц, выдающих себя за магазин. Официальные контакты — только этот сайт и Telegram @bbcbrand.</li>
+      </ul>
+
+      <h4>9. Персональные данные</h4>
+      <p>Указанные данные используются только для оформления и доставки заказа и связи с покупателем. Мы не передаём их третьим лицам, кроме службы доставки.</p>
+
+      <h4>10. Контакты</h4>
+      <p>Все вопросы по заказам, оплате, доставке и возврату — в Telegram <a href="https://t.me/bbcbrand" target="_blank" rel="noopener">@bbcbrand</a>.</p>
+    </article>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+var API = (window.BBC_API || '') + '/api';
+var COLORS = {
+  black:{name:'Чёрный', sw:'#141414', edge:'#1b1b1c', edge2:'#0d0d0e'},
+  red:{name:'Бордовый', sw:'#8e0b0b', edge:'#7a0606', edge2:'#4d0303'},
+  white:{name:'Белый', sw:'#f3f1ee', edge:'#e9e6e2', edge2:'#cfcac4'}
+};
+var ORDER = ['black','red','white'];
+var state = null, demo = false, clockOffset = 0, current = 'black';
+
+function now(){ return Date.now() + clockOffset; }
+function $(s, r){ return (r||document).querySelector(s); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+function demoState(){
+  var t = Date.now();
+  return { demo:true, now:t, currency:'₴', contact:'@bbcbrand',
+    payment:'Реквизиты появятся здесь — их задаёт админ в боте.',
+    products:{
+      black:{status:'in_stock', drop_at:null, price:null},
+      red:{status:'out', drop_at:t + 24*3600*1000 - 37000, price:null},
+      white:{status:'out', drop_at:null, price:null}
+    }};
+}
+
+function eff(p){
+  if(p.drop_at && now() < p.drop_at) return 'drop';
+  if(p.drop_at && now() >= p.drop_at) return 'in_stock';
+  return p.status === 'in_stock' ? 'in_stock' : 'out';
+}
+function fmtLeft(ms){
+  ms = Math.max(0, ms); var s = Math.floor(ms/1000);
+  var d = Math.floor(s/86400); s%=86400;
+  var h = Math.floor(s/3600), m = Math.floor(s%3600/60), sec = s%60;
+  var pad = function(n){return (n<10?'0':'')+n;};
+  return (d? d+'д ' : '') + pad(h)+':'+pad(m)+':'+pad(sec);
+}
+function priceText(p){ return p.price ? (Number(p.price).toLocaleString('ru-RU') + ' ' + (state.currency||'₴')) : 'Цена скоро'; }
+function statusHTML(p){
+  var e = eff(p);
+  if(e==='in_stock') return '<span class="st-in" style="display:inline-flex;align-items:center;gap:8px"><span class="dot"></span>В наличии</span>';
+  if(e==='drop') return '<span class="st-drop" style="display:inline-flex;align-items:center;gap:8px"><span class="dot"></span>Дроп через <span class="tnum" data-left="'+p.drop_at+'">'+fmtLeft(p.drop_at-now())+'</span></span>';
+  return '<span class="st-out" style="display:inline-flex;align-items:center;gap:8px"><span class="dot"></span>Нет в наличии</span>';
+}
+
+function load(){
+  return fetch(API + '/state', {cache:'no-store'}).then(function(r){ if(!r.ok) throw 0; return r.json(); })
+    .then(function(s){ state = s; demo = false; clockOffset = (s.now||Date.now()) - Date.now(); })
+    .catch(function(){ if(!state){ state = demoState(); demo = true; } });
+}
+
+function renderGrid(){
+  renderQuick();
+  var g = $('#grid'); g.innerHTML = '';
+  ORDER.forEach(function(k){
+    var p = state.products[k]; if(!p) return;
+    var b = document.createElement('button');
+    b.type='button'; b.className='prod'; b.setAttribute('aria-label','Картхолдер, цвет: '+COLORS[k].name);
+    b.innerHTML = '<div class="badge" data-badge="'+k+'">'+statusHTML(p)+'</div>'+
+      '<div class="ph"><img src="img/'+k+'-sm.jpg" alt="Картхолдер, '+COLORS[k].name.toLowerCase()+'" loading="lazy"></div>'+
+      '<div class="info"><div><h3>Картхолдер</h3><div class="sub">'+COLORS[k].name+'</div></div><div class="price">'+esc(priceText(p))+'</div></div>';
+    b.addEventListener('click', function(){ openProduct(k); });
+    g.appendChild(b);
+  });
+}
+
+function renderQuick(){
+  var q = $('#quick'); if(!q) return; q.innerHTML = '';
+  ORDER.forEach(function(k){
+    var p = state.products[k]; if(!p) return;
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'qbtn';
+    b.innerHTML = '<span class="c" style="background:'+COLORS[k].sw+'"></span><span><b>'+COLORS[k].name+'</b><small>'+statusHTML(p)+'</small></span>'+
+      '<span class="arr" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e8e9ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
+    b.addEventListener('click', function(){ openProduct(k); });
+    q.appendChild(b);
+  });
+}
+function renderHeroDrop(){
+  var soon = null;
+  ORDER.forEach(function(k){ var p = state.products[k]; if(p && p.drop_at && p.drop_at > now() && (!soon || p.drop_at < soon.t)) soon = {t:p.drop_at, k:k}; });
+  var el = $('#heroDrop');
+  if(soon){ el.classList.add('on'); $('#heroDropLabel').textContent = 'Дроп · '+COLORS[soon.k].name.toLowerCase()+' · через'; $('#heroDropT').textContent = fmtLeft(soon.t-now()); }
+  else el.classList.remove('on');
+}
+
+/* modals */
+var lastFocus = null;
+function openModal(id){ lastFocus = document.activeElement; var m = $('#'+id); m.classList.add('open'); document.body.style.overflow='hidden'; var x = m.querySelector('[data-close]'); if(x) x.focus(); }
+function closeModal(m){ m.classList.remove('open'); if(!document.querySelector('.modal.open')) document.body.style.overflow=''; if(m.id==='m3d') stop3d(); if(lastFocus && lastFocus.focus) lastFocus.focus(); }
+document.querySelectorAll('.modal').forEach(function(m){
+  m.addEventListener('click', function(e){ if(e.target===m || e.target.closest('[data-close]')) closeModal(m); });
+});
+document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ var ms = document.querySelectorAll('.modal.open'); if(ms.length) closeModal(ms[ms.length-1]); } });
+document.querySelectorAll('[data-open-rules]').forEach(function(b){ b.addEventListener('click', function(){ openModal('rModal'); }); });
+
+/* product modal */
+function swatches(active, onPick, label){
+  return '<div class="sw" role="group" aria-label="'+label+'">'+ORDER.map(function(k){
+    return '<button type="button" data-c="'+k+'" aria-pressed="'+(k===active)+'" aria-label="'+COLORS[k].name+'"><span style="background:'+COLORS[k].sw+'"></span></button>';
+  }).join('')+'</div>';
+}
+function countdownHTML(t){
+  return '<div class="countdown" data-cd="'+t+'">'+['дн','час','мин','сек'].map(function(l){return '<div><b>00</b><small>'+l+'</small></div>';}).join('')+'</div>';
+}
+function openProduct(k){ current = k; renderProduct(); openModal('pModal'); }
+function renderProduct(){
+  var k = current, p = state.products[k], e = eff(p);
+  $('#pImg').src = 'img/'+k+'.jpg'; $('#pImg').alt = 'Картхолдер, '+COLORS[k].name.toLowerCase();
+  var btn;
+  if(e==='in_stock') btn = '<button class="btn btn-silver" type="button" id="toOrder">Заказать</button>';
+  else if(e==='drop') btn = '<button class="btn btn-silver" type="button" disabled>Откроется после таймера</button>';
+  else btn = '<a class="btn btn-ghost" href="https://t.me/bbcbrand" target="_blank" rel="noopener">Следить за дропом в Telegram</a>';
+  $('#pBody').innerHTML =
+    '<div><div class="label">BBC BRAND</div><h3 id="pTitle" style="margin-top:8px">Картхолдер<br>'+COLORS[k].name.toLowerCase()+'</h3></div>'+
+    '<p class="desc">Картхолдер с фактурой «под крокодила», несколько отделений для карт и серебряное тиснение по центру.</p>'+
+    '<div><div class="label">Цвет · '+COLORS[k].name+'</div>'+swatches(k,null,'Цвет картхолдера')+'</div>'+
+    '<div class="stline">'+statusHTML(p)+'</div>'+
+    (e==='drop' ? countdownHTML(p.drop_at) : '')+
+    '<div class="bigprice">'+esc(priceText(p))+'</div>'+
+    btn+
+    '<p class="note">Доставка Новой Почтой · предоплата 100%</p>';
+  $('#pBody').querySelectorAll('.sw button').forEach(function(b){ b.addEventListener('click', function(){ current = b.dataset.c; renderProduct(); }); });
+  var o = $('#toOrder'); if(o) o.addEventListener('click', renderForm);
+  tick();
+}
+
+function renderForm(){
+  var k = current, p = state.products[k];
+  $('#pBody').innerHTML =
+    '<div><div class="label">Оформление заказа</div><h3 id="pTitle" style="margin-top:8px">Данные для доставки</h3></div>'+
+    '<div class="summary"><img src="img/'+k+'-sm.jpg" alt=""><div><b>Картхолдер</b><div class="note">'+COLORS[k].name+' · '+esc(priceText(p))+'</div></div></div>'+
+    '<form id="oForm" novalidate>'+
+      '<div class="row"><div class="field"><label for="f_last">Фамилия</label><input id="f_last" name="last_name" autocomplete="family-name" required maxlength="60"></div>'+
+      '<div class="field"><label for="f_first">Имя</label><input id="f_first" name="first_name" autocomplete="given-name" required maxlength="60"></div></div>'+
+      '<div class="field"><label for="f_phone">Номер телефона</label><input id="f_phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+380 __ ___ __ __" required maxlength="20"></div>'+
+      '<div class="row"><div class="field"><label for="f_city">Город</label><input id="f_city" name="city" autocomplete="address-level2" required maxlength="80"></div>'+
+      '<div class="field"><label for="f_np">Отделение / почтомат НП</label><input id="f_np" name="np" inputmode="numeric" placeholder="№ отделения" required maxlength="60"></div></div>'+
+      '<div class="field"><label for="f_tg">Telegram для связи (необязательно)</label><input id="f_tg" name="telegram" placeholder="@username" maxlength="40"></div>'+
+      '<div class="field"><label for="f_cm">Комментарий (необязательно)</label><textarea id="f_cm" name="comment" rows="2" maxlength="300"></textarea></div>'+
+      '<label class="check"><input type="checkbox" id="f_agree" required><span>Я ознакомлен(а) с <a href="#" data-r>правилами магазина</a>, условиями оплаты, доставки и возврата</span></label>'+
+      '<div class="formerr" id="ferr" role="alert"></div>'+
+      '<div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-silver" type="submit" id="fsub" style="flex:1">Оформить заказ</button><button class="btn btn-ghost" type="button" id="fback">Назад</button></div>'+
+    '</form>';
+  $('#fback').addEventListener('click', renderProduct);
+  $('#oForm [data-r]').addEventListener('click', function(e){ e.preventDefault(); openModal('rModal'); });
+  $('#f_phone').addEventListener('blur', function(){ var d = this.value.replace(/\D/g,''); if(d.length===10 && d[0]==='0') this.value = '+38'+d; else if(d.length===12 && d.indexOf('380')===0) this.value = '+'+d; });
+  $('#oForm').addEventListener('submit', submitOrder);
+  $('#f_last').focus();
+}
+
+function submitOrder(e){
+  e.preventDefault();
+  var f = e.target, err = $('#ferr'), bad = [];
+  var data = {color: current};
+  ['last_name','first_name','phone','city','np','telegram','comment'].forEach(function(n){ data[n] = (f.elements[n].value||'').trim(); });
+  f.querySelectorAll('input').forEach(function(i){ i.classList.remove('err'); });
+  ['last_name','first_name','city','np'].forEach(function(n){ if(data[n].length < 2 && !(n==='np' && data[n].length)) bad.push(n); });
+  var digits = data.phone.replace(/\D/g,'');
+  if(digits.length < 10 || digits.length > 13) bad.push('phone');
+  bad.forEach(function(n){ f.elements[n].classList.add('err'); });
+  if(bad.length){ err.textContent = 'Проверь выделенные поля.'; f.elements[bad[0]].focus(); return; }
+  if(!$('#f_agree').checked){ err.textContent = 'Нужно согласиться с правилами магазина.'; return; }
+  err.textContent = '';
+  var sb = $('#fsub'); sb.disabled = true; sb.textContent = 'Отправляем…';
+  var done = function(res){
+    $('#pBody').innerHTML =
+      '<div class="ok-box"><div class="label">Заказ принят</div><div class="num silver">№ '+esc(res.id)+'</div>'+
+      '<p class="desc">Картхолдер · '+COLORS[current].name.toLowerCase()+' · '+esc(priceText(state.products[current]))+'</p></div>'+
+      '<div><div class="label" style="margin-bottom:8px">Оплата</div><div class="pay">'+esc(res.payment || state.payment || '')+'</div></div>'+
+      '<p class="note">После оплаты отправь скрин и номер заказа в Telegram <a href="https://t.me/'+esc((state.contact||'@bbcbrand').replace('@',''))+'" target="_blank" rel="noopener">'+esc(state.contact||'@bbcbrand')+'</a>. Мы отправим посылку и пришлём ТТН.</p>'+
+      (res.demo ? '<p class="note">Это демо-режим: сайт не подключён к боту, заказ никуда не отправлен.</p>' : '')+
+      '<a class="btn btn-silver" href="https://t.me/'+esc((state.contact||'@bbcbrand').replace('@',''))+'" target="_blank" rel="noopener">Отправить скрин оплаты</a>';
+  };
+  if(demo){ setTimeout(function(){ done({id:'BBC-DEMO', demo:true}); }, 500); return; }
+  fetch(API + '/order', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)})
+    .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+    .then(function(x){
+      if(!x.ok){ err.textContent = x.j.error || 'Не получилось оформить заказ. Попробуй ещё раз.'; sb.disabled=false; sb.textContent='Оформить заказ'; if(x.j.state){ state = x.j.state; renderGrid(); } return; }
+      done(x.j);
+    })
+    .catch(function(){ err.textContent = 'Нет связи с сервером. Попробуй ещё раз или напиши нам в Telegram.'; sb.disabled=false; sb.textContent='Оформить заказ'; });
+}
+
+/* ticking */
+var lastEff = '';
+function tick(){
+  if(!state) return;
+  var sig = ORDER.map(function(k){ return eff(state.products[k]); }).join();
+  if(lastEff && sig !== lastEff){ lastEff = sig; renderGrid(); if($('#pModal').classList.contains('open') && !$('#oForm') && !$('.ok-box')) renderProduct(); }
+  lastEff = sig;
+  document.querySelectorAll('[data-left]').forEach(function(el){ el.textContent = fmtLeft(+el.dataset.left - now()); });
+  document.querySelectorAll('[data-cd]').forEach(function(el){
+    var s = Math.max(0, Math.floor((+el.dataset.cd - now())/1000));
+    var v = [Math.floor(s/86400), Math.floor(s%86400/3600), Math.floor(s%3600/60), s%60];
+    el.querySelectorAll('b').forEach(function(b,i){ b.textContent = (v[i]<10?'0':'')+v[i]; });
+  });
+  renderHeroDrop();
+}
+setInterval(tick, 1000);
+setInterval(function(){ if(demo) return; load().then(function(){ var o = $('#pModal').classList.contains('open') && !$('#oForm') && !$('.ok-box'); renderGrid(); if(o) renderProduct(); tick(); }); }, 20000);
+
+/* 3D viewer */
+var rx = -14, ry = -28, vx = 0, vy = 0.25, dragging = false, raf = 0, lastX = 0, lastY = 0, idleT = 0;
+var obj = $('#obj');
+function set3dColor(k){
+  $('#tFront').src = 'img/'+k+'-front.jpg'; $('#tBack').src = 'img/'+k+'-back.jpg';
+  var c = COLORS[k];
+  document.querySelectorAll('#obj .edge').forEach(function(e,i){ e.style.background = 'linear-gradient(90deg,'+c.edge2+','+c.edge+','+c.edge2+')'; });
+  $('#sw3d').innerHTML = ORDER.map(function(x){ return '<button type="button" data-c="'+x+'" aria-pressed="'+(x===k)+'" aria-label="'+COLORS[x].name+'"><span style="background:'+COLORS[x].sw+'"></span></button>'; }).join('');
+  $('#sw3d').querySelectorAll('button').forEach(function(b){ b.addEventListener('click', function(){ set3dColor(b.dataset.c); }); });
+}
+function render3d(){
+  obj.style.transform = 'rotateX('+rx+'deg) rotateY('+ry+'deg)';
+  var a = ((ry % 360) + 360) % 360;
+  var gx = 50 + Math.sin(a*Math.PI/180)*60, gy = 30 - rx;
+  var g = 'radial-gradient(ellipse 60% 80% at '+gx+'% '+gy+'%, rgba(255,255,255,.28), rgba(255,255,255,0) 60%)';
+  $('#glossF').style.background = g; $('#glossB').style.background = g;
+}
+function loop(){
+  if(!dragging){
+    idleT++;
+    if(idleT > 90) vy += (0.35 - vy) * 0.02; // drift back to slow auto spin
+    ry += vy; rx += vx; vx *= 0.94; vy *= (idleT > 90 ? 1 : 0.96);
+    rx += (-14 - rx) * 0.02;
+  }
+  render3d(); raf = requestAnimationFrame(loop);
+}
+function stop3d(){ cancelAnimationFrame(raf); raf = 0; }
+var stage = $('#stage');
+stage.addEventListener('pointerdown', function(e){ dragging = true; lastX = e.clientX; lastY = e.clientY; vx = vy = 0; stage.setPointerCapture(e.pointerId); });
+stage.addEventListener('pointermove', function(e){
+  if(!dragging) return;
+  var dx = e.clientX - lastX, dy = e.clientY - lastY; lastX = e.clientX; lastY = e.clientY;
+  ry += dx * 0.5; rx = Math.max(-70, Math.min(70, rx - dy * 0.4)); vy = dx * 0.5; vx = -dy * 0.4;
+});
+['pointerup','pointercancel'].forEach(function(t){ stage.addEventListener(t, function(){ dragging = false; idleT = 0; }); });
+$('#open3d').addEventListener('click', function(){ set3dColor(current); rx = -14; ry = -28; vx = 0; vy = 0.35; idleT = 100; openModal('m3d'); if(!raf) loop(); });
+
+/* boot */
+$('#yr').textContent = new Date().getFullYear();
+load().then(function(){ renderGrid(); tick(); if(demo) toast('Демо-режим: подключи сайт к боту, чтобы наличие и заказы работали вживую'); });
+var tt;
+function toast(t){ var el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(tt); tt = setTimeout(function(){ el.classList.remove('show'); }, 4200); }
+})();
+</script>
+</body>
+</html>

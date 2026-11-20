@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BBC BRAND — магазин</title>
-<meta name="description" content="BBC BRAND — магазин. Картхолдеры с серебряным тиснением: чёрный, бордовый, белый. Доставка Новой Почтой по Украине.">
-<meta name="theme-color" content="#0a0a0b">
+<meta name="description" content="BBC BRAND — картхолдеры из эко-кожи с серебряным тиснением: чёрный, бордовый, белый. Доставка Новой Почтой по Украине.">
+<meta name="theme-color" content="#0a0a0a">
 <link rel="icon" href="img/logo.png">
+<script>
+(function(){
+  try{
+    var t = localStorage.getItem('bbc_theme'); if(t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    var l = localStorage.getItem('bbc_lang'); if(l === 'en' || l === 'ru') document.documentElement.setAttribute('lang', l);
+  }catch(e){}
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
 <style>
+
 :root{
   --bg:#0a0a0a; --bg2:#111213; --card:#151617; --line:#26282a; --onyx:#353839;
   --text:#f2f2f3; --muted:#9a9ca0; --dim:#6d6f73;
+  --hdr:rgba(10,10,10,.78); --hover:#17181a; --field:#0c0d0e; --badge:rgba(10,10,11,.82); --xbg:rgba(10,10,11,.7); --xfg:#fff; --icon:#d9dadc; --rules:#c8c9cc; --toastbg:#f2f2f3; --toastfg:#0b0b0c; --btnfg:#0b0b0c; --sel:#e8e9ea;
   --silver:linear-gradient(100deg,#8e9095 0%,#f4f5f6 35%,#a7a9ad 55%,#eceef0 78%,#9a9ca1 100%);
   --ok:#7fd99a; --warn:#e7c46a; --bad:#ef6b6b;
   --r:18px;
@@ -28,13 +38,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .logo-b{width:34px;height:28px;background:var(--silver);-webkit-mask:url(img/logo.png) center/contain no-repeat;mask:url(img/logo.png) center/contain no-repeat}
 
 /* header */
-header{position:sticky;top:0;z-index:20;background:rgba(10,10,11,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:20;background:var(--hdr);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
 .brand-name{font-weight:800;letter-spacing:.16em;font-size:15px;white-space:nowrap}
 .nav-links{display:flex;gap:6px;align-items:center}
 .nav-links a,.nav-links button{background:none;border:0;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.06em;color:var(--muted);padding:10px 12px;border-radius:10px;min-height:44px;display:inline-flex;align-items:center;gap:8px}
-.nav-links a:hover,.nav-links button:hover{color:var(--text);background:#17181a}
+.nav-links a:hover,.nav-links button:hover{color:var(--text);background:var(--hover)}
 .tg-btn{border:1px solid var(--line)!important;color:var(--text)!important}
 @media (max-width:720px){.nav-links .hide-m{display:none}.brand-name{font-size:13px;letter-spacing:.12em}}
 
@@ -48,17 +58,18 @@ header{position:sticky;top:0;z-index:20;background:rgba(10,10,11,.78);backdrop-f
 .cta{display:flex;flex-wrap:wrap;gap:12px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:14px;border:1px solid transparent;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:transform .15s,background .2s,border-color .2s}
 .btn:active{transform:scale(.98)}
-.btn-silver{background:var(--silver);color:#0b0b0c}
+.btn-silver{background:var(--btnbg,var(--silver));color:var(--btnfg)}
 .btn-silver:hover{filter:brightness(1.06)}
 .btn-ghost{background:transparent;border-color:var(--onyx);color:var(--text)}
-.btn-ghost:hover{background:#151617}
+.btn-ghost:hover{background:var(--hover)}
 .btn[disabled]{opacity:.45;cursor:not-allowed;filter:grayscale(1)}
-.hero-drop{margin-top:26px;display:none;align-items:center;gap:14px;padding:12px 16px;border:1px solid var(--onyx);border-radius:14px;background:#111213;width:max-content;max-width:100%}
+.hero-drop{margin-top:26px;display:none;align-items:center;gap:14px;padding:12px 16px;border:1px solid var(--onyx);border-radius:14px;background:var(--bg2);width:max-content;max-width:100%}
 .hero-drop.on{display:inline-flex}
 .hero-drop .t{font-variant-numeric:tabular-nums;font-weight:800;font-size:20px;letter-spacing:.06em}
 .hero-drop small{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
-.phone{position:relative;justify-self:center;width:min(380px,100%);aspect-ratio:9/16;background:var(--bg)}
-.phone video{width:100%;height:100%;object-fit:cover}
+.phone{position:relative;justify-self:center;width:min(380px,100%);aspect-ratio:9/16;background:transparent}
+.phone video{width:100%;height:100%;object-fit:cover;mix-blend-mode:screen}
+html[data-theme="light"] .phone video{mix-blend-mode:multiply}
 @media (max-width:860px){.hero-grid{grid-template-columns:1fr;padding-top:36px;padding-bottom:48px;gap:34px}.phone{width:min(320px,86vw)}}
 
 /* sections */
@@ -80,7 +91,7 @@ section{padding:84px 0}
 .prod h3{margin:0;font-size:16px;font-weight:700;letter-spacing:.02em}
 .prod .price{font-weight:800;font-size:16px;white-space:nowrap}
 .prod .sub{color:var(--muted);font-size:13px;margin-top:2px}
-.badge{position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(10,10,11,.82);backdrop-filter:blur(8px);font-size:12px;font-weight:700;letter-spacing:.06em}
+.badge{position:absolute;top:14px;left:14px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--badge);backdrop-filter:blur(8px);font-size:12px;font-weight:700;letter-spacing:.06em}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--dim)}
 .st-in .dot{background:var(--ok);box-shadow:0 0 0 4px rgba(127,217,154,.15)}
 .st-out .dot{background:var(--bad)}
@@ -105,17 +116,9 @@ section{padding:84px 0}
 @media (max-width:860px){.how{grid-template-columns:1fr 1fr}}
 @media (max-width:480px){.how{grid-template-columns:1fr}}
 
-.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
-.qbtn{display:flex;align-items:center;gap:16px;min-height:96px;padding:18px 20px;border-radius:var(--r);border:1px solid var(--line);background:var(--card);text-align:left;transition:transform .2s,border-color .2s,background .2s}
-.qbtn:hover{transform:translateY(-3px);border-color:var(--onyx);background:#18191b}
-.qbtn .c{width:52px;height:52px;border-radius:50%;flex:none;border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 -8px 16px rgba(0,0,0,.35),inset 0 6px 10px rgba(255,255,255,.12)}
-.qbtn b{display:block;font-size:17px}
-.qbtn small{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;margin-top:2px}
-.qbtn .arr{margin-left:auto;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;flex:none}
 .tgcta{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:30px;border-radius:var(--r);border:1px solid var(--onyx);background:radial-gradient(120% 140% at 0% 0%,#1d1f21 0%,#0f1011 60%);text-decoration:none}
 .tgcta b{display:block;font-size:clamp(22px,3vw,30px);margin:10px 0 6px;line-height:1.15}
 .tgsub{color:var(--muted);font-size:14px}
-@media (max-width:860px){.quick{grid-template-columns:1fr}}
 footer{border-top:1px solid var(--line);padding:36px 0 50px;color:var(--muted);font-size:13px}
 .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
 .foot .links{display:flex;gap:6px;flex-wrap:wrap}
@@ -128,7 +131,7 @@ footer{border-top:1px solid var(--line);padding:36px 0 50px;color:var(--muted);f
 @keyframes fade{from{opacity:0}}
 .sheet{position:relative;width:min(1000px,100%);max-height:calc(100vh - 40px);overflow:auto;background:var(--bg2);border:1px solid var(--line);border-radius:24px;animation:up .28s cubic-bezier(.2,.8,.2,1)}
 @keyframes up{from{transform:translateY(24px);opacity:0}}
-.x{position:absolute;top:12px;right:12px;z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(10,10,11,.7);display:grid;place-items:center}
+.x{position:absolute;top:12px;right:12px;z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--xbg);color:var(--xfg);display:grid;place-items:center}
 .x svg{width:18px;height:18px}
 .pm{display:grid;grid-template-columns:1fr 1fr}
 .pm .media{position:relative;background:#efeeeb;min-height:420px}
@@ -143,12 +146,12 @@ footer{border-top:1px solid var(--line);padding:36px 0 50px;color:var(--muted);f
 .sw{display:flex;gap:12px;margin-top:10px}
 .sw button{width:48px;height:48px;border-radius:50%;border:2px solid transparent;padding:4px;background:none}
 .sw button span{display:block;width:100%;height:100%;border-radius:50%;border:1px solid rgba(255,255,255,.15)}
-.sw button[aria-pressed="true"]{border-color:#e8e9ea}
+.sw button[aria-pressed="true"]{border-color:var(--sel)}
 .stline{display:flex;align-items:center;gap:10px;font-weight:700}
 .stline .dot{width:10px;height:10px}
 .bigprice{font-size:30px;font-weight:800}
 .countdown{display:flex;gap:8px}
-.countdown div{min-width:64px;padding:10px 8px;border:1px solid var(--onyx);border-radius:12px;text-align:center;background:#0d0e0f}
+.countdown div{min-width:64px;padding:10px 8px;border:1px solid var(--onyx);border-radius:12px;text-align:center;background:var(--field)}
 .countdown b{display:block;font-size:24px;font-variant-numeric:tabular-nums}
 .countdown small{color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
 .note{font-size:13px;color:var(--muted)}
@@ -160,23 +163,23 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media (max-width:480px){form .row{grid-template-columns:1fr}}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
 .field label{font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--muted)}
-.field input,.field textarea{width:100%;min-height:48px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#0c0d0e;color:var(--text);font:inherit;font-size:16px;outline:none;transition:border-color .2s}
+.field input,.field textarea{width:100%;min-height:48px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--field);color:var(--text);font:inherit;font-size:16px;outline:none;transition:border-color .2s}
 .field input:focus,.field textarea:focus{border-color:#8e9095}
 .field input.err{border-color:var(--bad)}
 .check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin:6px 0 16px}
 .check input{width:20px;height:20px;margin:1px 0 0;accent-color:#d9dadc;flex:none}
-.summary{display:flex;align-items:center;gap:14px;padding:12px;border:1px solid var(--line);border-radius:14px;margin-bottom:16px;background:#0d0e0f}
+.summary{display:flex;align-items:center;gap:14px;padding:12px;border:1px solid var(--line);border-radius:14px;margin-bottom:16px;background:var(--field)}
 .summary img{width:64px;height:64px;object-fit:cover;border-radius:10px}
 .formerr{color:var(--bad);font-size:13px;min-height:18px;margin-bottom:8px}
 .ok-box{text-align:center;padding:10px 0}
 .ok-box .num{font-size:30px;font-weight:800;margin:8px 0}
-.pay{white-space:pre-wrap;text-align:left;border:1px dashed var(--onyx);border-radius:14px;padding:16px;background:#0d0e0f;font-size:14px}
+.pay{white-space:pre-wrap;text-align:left;border:1px dashed var(--onyx);border-radius:14px;padding:16px;background:var(--field);font-size:14px}
 
 /* rules */
 .rules{padding:40px 34px;max-width:820px}
 .rules h3{font-size:30px;margin:0 0 6px}
 .rules h4{margin:28px 0 8px;font-size:16px;letter-spacing:.04em}
-.rules p,.rules li{color:#c8c9cc;font-size:14.5px}
+.rules p,.rules li{color:var(--rules);font-size:14.5px}
 .rules ul{padding-left:20px;margin:6px 0}
 .rules .upd{color:var(--dim);font-size:13px}
 @media (max-width:600px){.rules{padding:30px 20px}}
@@ -204,22 +207,51 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .v3d-bar .hint{color:var(--muted);font-size:13px;display:flex;align-items:center;gap:8px}
 .scaler{transform:scale(1.3);transform-style:preserve-3d}@media (max-width:700px){.scaler{transform:scale(.85)}}
 
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:#f2f2f3;color:#0b0b0c;font-weight:700;padding:14px 18px;border-radius:14px;z-index:80;transition:transform .3s;font-size:14px;max-width:calc(100% - 40px)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--toastbg);color:var(--toastfg);font-weight:700;padding:14px 18px;border-radius:14px;z-index:80;transition:transform .3s;font-size:14px;max-width:calc(100% - 40px)}
 .toast.show{transform:translateX(-50%) translateY(0)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* light theme */
+html[data-theme="light"]{
+  --bg:#ffffff; --bg2:#f4f4f5; --card:#f6f6f7; --line:#e3e4e6; --onyx:#c8c9cc;
+  --text:#0b0b0c; --muted:#55575c; --dim:#6b6d72;
+  --silver:linear-gradient(100deg,#2a2b2e 0%,#7c7e83 35%,#3a3b3f 55%,#6f7176 78%,#2f3033 100%);
+  --hdr:rgba(255,255,255,.85); --hover:#eeeef0; --field:#ffffff; --badge:rgba(255,255,255,.9); --xbg:rgba(255,255,255,.9); --xfg:#0b0b0c; --icon:#2a2b2e; --rules:#3a3b3e;
+  --toastbg:#0b0b0c; --toastfg:#fff; --btnbg:#0b0b0c; --btnfg:#ffffff; --sel:#0b0b0c; --ok:#1f9d4c; --warn:#b7860f; --bad:#d23c3c;
+}
+html[data-theme="light"] .tgcta{background:radial-gradient(120% 140% at 0% 0%,#f4f4f5 0%,#ffffff 60%)}
+html[data-theme="light"] .modal{background:rgba(20,20,22,.45)}
+html[data-theme="light"] .sw button span{border-color:rgba(0,0,0,.18)}
+html[data-theme="light"] .logo-b{background:#0b0b0c}
+.feat svg{stroke:var(--icon)}
+/* header toggles */
+.tgl{min-width:44px;justify-content:center;border:1px solid var(--line)!important;font-weight:800!important;letter-spacing:.1em!important}
+.tgl svg{width:18px;height:18px}
+/* product specs */
+.specs{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.specs li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:14px;color:var(--muted);line-height:1.45}
+.specs li svg{width:20px;height:20px;stroke:var(--icon);margin-top:1px}
+.specs b{color:var(--text);font-weight:700}
+[data-lang]{display:none}
+html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
+
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="BBC BRAND — на главную">
+    <a class="brand" href="#top" data-i18n-aria="aria_home" aria-label="BBC BRAND — на главную">
       <span class="logo-b" aria-hidden="true"></span>
       <span class="brand-name silver">BBC BRAND</span>
     </a>
-    <nav class="nav-links" aria-label="Меню">
-      <a class="hide-m" href="#catalog">Каталог</a>
-      <a class="hide-m" href="#delivery">Доставка</a>
+    <nav class="nav-links" data-i18n-aria="aria_menu" aria-label="Меню">
+      <a class="hide-m" href="#catalog" data-i18n="nav_catalog">Каталог</a>
+      <a class="hide-m" href="#delivery" data-i18n="nav_delivery">Доставка</a>
+      <button class="tgl" type="button" id="langBtn" aria-label="Switch to English">EN</button>
+      <button class="tgl" type="button" id="themeBtn" aria-label="Светлая тема">
+        <svg id="themeIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
+      </button>
       <a class="tg-btn" href="https://t.me/bbcbrand" target="_blank" rel="noopener" aria-label="Telegram @bbcbrand">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 4.5 2.8 11.7c-.9.4-.9 1 .1 1.3l4.6 1.4 1.8 5.4c.2.6.4.7.9.3l2.6-2.2 4.9 3.6c.8.5 1.3.2 1.5-.7L22.6 5.6c.3-1.2-.3-1.6-1.1-1.1z"/><path d="m7.5 14.4 9.8-6.2"/></svg>
         <span class="hide-m">@bbcbrand</span>
@@ -232,20 +264,20 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   <section class="hero" style="padding:0">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow"><i></i>магазин<i></i></span>
+        <span class="eyebrow"><i></i><span data-i18n="hero_eyebrow">магазин</span><i></i></span>
         <h1><span class="silver">BBC</span><br>BRAND</h1>
-        <p class="lead">Сейчас в продаже — картхолдеры с фактурой «под крокодила» и серебряным тиснением в трёх цветах. Доставка Новой Почтой по всей Украине.</p>
+        <p class="lead" data-i18n="hero_lead">Сейчас в продаже — картхолдеры из эко-кожи с фактурой «под крокодила» и серебряным тиснением в трёх цветах. Доставка Новой Почтой по всей Украине.</p>
         <div class="cta">
-          <a class="btn btn-silver" href="#catalog">Смотреть каталог</a>
+          <a class="btn btn-silver" href="#catalog" data-i18n="hero_cta">Смотреть каталог</a>
           <a class="btn btn-ghost" href="https://t.me/bbcbrand" target="_blank" rel="noopener">Telegram</a>
         </div>
         <div class="hero-drop" id="heroDrop" role="status">
           <span class="dot" style="background:var(--warn)"></span>
-          <div><small id="heroDropLabel">Дроп через</small><div class="t" id="heroDropT">00:00:00</div></div>
+          <div><small id="heroDropLabel">Дроп · картхолдер · через</small><div class="t" id="heroDropT">00:00:00</div></div>
         </div>
       </div>
       <div class="phone" aria-hidden="true">
-        <video id="promo" src="img/promo.mp4" poster="img/promo-poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
+        <video id="promo" src="img/promo-dark.mp4" autoplay muted loop playsinline preload="auto"></video>
       </div>
     </div>
   </section>
@@ -253,8 +285,8 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   <section id="catalog">
     <div class="wrap">
       <div class="sec-head">
-        <div><span class="eyebrow"><i></i>каталог</span><h2>Выбери свой цвет</h2></div>
-        <p>Нажми на картхолдер, чтобы посмотреть его ближе, покрутить в 3D и оформить заказ.</p>
+        <div><span class="eyebrow"><i></i><span data-i18n="cat_eyebrow">каталог</span></span><h2 data-i18n="cat_title">Выбери свой цвет</h2></div>
+        <p data-i18n="cat_sub">Нажми на картхолдер, чтобы посмотреть его ближе, покрутить в 3D и оформить заказ.</p>
       </div>
       <div class="grid" id="grid"></div>
     </div>
@@ -263,10 +295,10 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   <section id="delivery" style="padding-top:0">
     <div class="wrap">
       <div class="feat">
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="#d9dadc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg><b>Новая Почта</b><span>Отправка в отделение или почтомат по всей Украине</span></div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="#d9dadc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>1–3 рабочих дня</b><span>Отправляем после подтверждения оплаты и присылаем ТТН</span></div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="#d9dadc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg><b>Предоплата 100%</b><span>Реквизиты появятся сразу после оформления заказа</span></div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="#d9dadc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><b>Поддержка</b><span>Ответим на вопросы в Telegram @bbcbrand</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg><b data-i18n="f1_t">Новая Почта</b><span data-i18n="f1_s">Отправка в отделение или почтомат по всей Украине</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b data-i18n="f2_t">1–3 рабочих дня</b><span data-i18n="f2_s">Отправляем после предоплаты и присылаем ТТН</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg><b data-i18n="f3_t">Предоплата ₴150</b><span data-i18n="f3_s">Остаток — при получении на Новой Почте</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><b data-i18n="f4_t">Поддержка</b><span data-i18n="f4_s">Ответим на вопросы в Telegram @bbcbrand</span></div>
       </div>
     </div>
   </section>
@@ -276,10 +308,10 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
       <a class="tgcta" href="https://t.me/bbcbrand" target="_blank" rel="noopener">
         <div>
           <span class="eyebrow"><i></i>telegram</span>
-          <b>Дропы и новинки — первыми в канале</b>
-          <span class="tgsub">Анонсы, таймеры и новые товары BBC BRAND</span>
+          <b data-i18n="tg_t">Дропы и новинки — первыми в канале</b>
+          <span class="tgsub" data-i18n="tg_s">Анонсы, таймеры и новые товары BBC BRAND</span>
         </div>
-        <span class="btn btn-silver">Подписаться @bbcbrand</span>
+        <span class="btn btn-silver" data-i18n="tg_btn">Подписаться @bbcbrand</span>
       </a>
     </div>
   </section>
@@ -289,7 +321,7 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   <div class="wrap foot">
     <div style="display:flex;align-items:center;gap:12px"><span class="logo-b" aria-hidden="true"></span><span>© <span id="yr"></span> BBC BRAND</span></div>
     <div class="links">
-      <a href="#delivery">Доставка</a>
+      <a href="#delivery" data-i18n="nav_delivery">Доставка</a>
       <a href="https://t.me/bbcbrand" target="_blank" rel="noopener">Telegram @bbcbrand</a>
     </div>
   </div>
@@ -298,11 +330,11 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 <!-- product modal -->
 <div class="modal" id="pModal" role="dialog" aria-modal="true" aria-labelledby="pTitle">
   <div class="sheet">
-    <button class="x" type="button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <button class="x" type="button" data-close data-i18n-aria="close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
     <div class="pm">
       <div class="media">
         <img id="pImg" src="img/black.jpg" alt="">
-        <button class="chip3d" type="button" id="open3d" aria-label="Открыть 3D-модель"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></svg>3D</button>
+        <button class="chip3d" type="button" id="open3d" data-i18n-aria="open3d" aria-label="Открыть 3D-модель"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9z"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/></svg>3D</button>
       </div>
       <div class="body" id="pBody"></div>
     </div>
@@ -310,9 +342,9 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 </div>
 
 <!-- 3D modal -->
-<div class="modal" id="m3d" role="dialog" aria-modal="true" aria-label="3D-модель картхолдера">
+<div class="modal" id="m3d" role="dialog" aria-modal="true" data-i18n-aria="aria_3d" aria-label="3D-модель картхолдера">
   <div class="sheet v3d">
-    <button class="x" type="button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <button class="x" type="button" data-close data-i18n-aria="close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
     <div class="stage" id="stage">
       <div class="scaler"><div class="obj" id="obj">
         <div class="face f-front"><img id="tFront" src="img/black-front.jpg" alt="" draggable="false"><div class="gloss" id="glossF"></div></div>
@@ -322,17 +354,17 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
       <div class="shadow3d" aria-hidden="true"></div>
     </div>
     <div class="v3d-bar">
-      <span class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11V9.5a1.5 1.5 0 0 1 3 0V12M14 11.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.7-2.3L3.5 16a1.6 1.6 0 0 1 2.4-2L8 15.5"/></svg>Тяни, чтобы покрутить</span>
-      <div class="sw" id="sw3d" role="group" aria-label="Цвет 3D-модели" style="margin:0"></div>
+      <span class="hint" style="color:#9a9ca0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V12M11 11V9.5a1.5 1.5 0 0 1 3 0V12M14 11.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-4.7-2.3L3.5 16a1.6 1.6 0 0 1 2.4-2L8 15.5"/></svg><span data-i18n="drag">Тяни, чтобы покрутить</span></span>
+      <div class="sw" id="sw3d" role="group" style="margin:0"></div>
     </div>
   </div>
 </div>
 
 <!-- rules modal -->
-<div class="modal" id="rModal" role="dialog" aria-modal="true" aria-labelledby="rTitle">
+<div class="modal" id="rModal" role="dialog" aria-modal="true" data-i18n-aria="rules" aria-label="Правила магазина">
   <div class="sheet" style="width:min(860px,100%)">
-    <button class="x" type="button" data-close aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    <article class="rules">
+    <button class="x" type="button" data-close data-i18n-aria="close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div data-lang="ru"><article class="rules">
       <h3 id="rTitle">Правила магазина</h3>
       <div class="upd">BBC BRAND · Telegram @bbcbrand</div>
 
@@ -343,13 +375,15 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
       <ul>
         <li>Для заказа нужно указать фамилию, имя, номер телефона, город и номер отделения или почтомата Новой Почты.</li>
         <li>Покупатель несёт полную ответственность за правильность указанных данных. Если посылка ушла не туда из-за ошибки в данных, повторная отправка оплачивается покупателем.</li>
-        <li>Заказ считается подтверждённым только после поступления оплаты. Неоплаченный заказ может быть отменён без уведомления.</li>
+        <li>Заказ считается подтверждённым только после поступления предоплаты. Неоплаченный заказ может быть отменён без уведомления.</li>
         <li>Магазин вправе отказать в оформлении заказа без объяснения причин. В этом случае оплаченные средства возвращаются в полном объёме.</li>
       </ul>
 
       <h4>3. Оплата</h4>
       <ul>
-        <li>Работаем по 100% предоплате. Реквизиты для оплаты показываются сразу после оформления заказа на сайте.</li>
+        <li>Для подтверждения заказа вносится предоплата <b>₴150</b>. Реквизиты показываются сразу после оформления заказа на сайте.</li>
+        <li>Остаток суммы оплачивается при получении посылки на Новой Почте (наложенный платёж). Комиссию Новой Почты за наложенный платёж оплачивает покупатель.</li>
+        <li>Предоплата не возвращается, если покупатель отказался от посылки или не забрал её в срок хранения: она покрывает стоимость отправки и возврата.</li>
         <li>После оплаты обязательно отправьте скрин или квитанцию в Telegram <b>@bbcbrand</b> и укажите номер заказа.</li>
         <li>Магазин не несёт ответственности за денежные средства, отправленные по реквизитам, полученным не с этого сайта и не из официального Telegram-канала @bbcbrand. Мы никогда не просим оплату через третьих лиц.</li>
         <li>Магазин не несёт ответственности за ошибки при переводе (неверный номер карты, неверная сумма), задержки зачисления и комиссии банков и платёжных систем.</li>
@@ -359,7 +393,7 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
       <h4>4. Доставка</h4>
       <ul>
         <li>Доставка осуществляется Новой Почтой по Украине в отделение или почтомат.</li>
-        <li>Отправка — в течение 1–3 рабочих дней после подтверждения оплаты. Номер ТТН мы отправляем покупателю.</li>
+        <li>Отправка — в течение 1–3 рабочих дней после подтверждения предоплаты. Номер ТТН мы отправляем покупателю.</li>
         <li>Стоимость доставки оплачивается получателем по тарифам Новой Почты при получении посылки.</li>
         <li>Сроки доставки зависят от Новой Почты. Магазин не несёт ответственности за задержки, утерю или повреждение посылки по вине перевозчика — после передачи посылки перевозчику ответственность за её сохранность несёт перевозчик.</li>
         <li>Проверяйте посылку при получении в отделении. Претензии по внешнему повреждению упаковки оформляются на месте с сотрудником Новой Почты.</li>
@@ -382,7 +416,7 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
       <h4>7. Дропы и наличие</h4>
       <ul>
         <li>Количество товара ограничено. Таймер на сайте показывает время до открытия продаж (дропа).</li>
-        <li>Товар закрепляется за покупателем только после оплаты. Оформление заказа без оплаты не гарантирует бронь.</li>
+        <li>Товар закрепляется за покупателем только после предоплаты. Оформление заказа без оплаты не гарантирует бронь.</li>
         <li>Если товар закончился, пока заказ ожидал оплату, мы свяжемся с вами и предложим другой цвет или вернём деньги в полном объёме.</li>
       </ul>
 
@@ -398,7 +432,77 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
       <h4>10. Контакты</h4>
       <p>Все вопросы по заказам, оплате, доставке и возврату — в Telegram <a href="https://t.me/bbcbrand" target="_blank" rel="noopener">@bbcbrand</a>.</p>
+    </article></div>
+    <div data-lang="en"><article class="rules">
+      <h3>Store rules</h3>
+      <div class="upd">BBC BRAND · Telegram @bbcbrand</div>
+
+      <h4>1. General</h4>
+      <p>By placing an order on this website, the customer confirms that they have read and fully accept these rules. The store may change its rules, prices and delivery terms without prior notice. The rules published on the website at the time of the order apply.</p>
+
+      <h4>2. Placing an order</h4>
+      <ul>
+        <li>To order, enter your last name, first name, phone number, city and Nova Poshta branch or parcel locker number.</li>
+        <li>The customer is fully responsible for the accuracy of the details provided. If a parcel is sent to the wrong place because of incorrect details, re-shipping is paid by the customer.</li>
+        <li>An order is confirmed only after the prepayment is received. An unpaid order may be cancelled without notice.</li>
+        <li>The store may decline an order without giving a reason. In that case, any money paid is refunded in full.</li>
+      </ul>
+
+      <h4>3. Payment</h4>
+      <ul>
+        <li>A prepayment of <b>₴150</b> is required to confirm the order. Payment details are shown right after you place the order on the website.</li>
+        <li>The rest is paid on receipt at Nova Poshta (cash on delivery). Nova Poshta's cash-on-delivery fee is paid by the customer.</li>
+        <li>The prepayment is not refunded if the customer refuses the parcel or does not collect it within the storage period: it covers shipping and return costs.</li>
+        <li>After paying, send a screenshot or receipt to Telegram <b>@bbcbrand</b> with your order number.</li>
+        <li>The store is not responsible for money sent to payment details obtained anywhere other than this website or the official Telegram channel @bbcbrand. We never ask for payment through third parties.</li>
+        <li>The store is not responsible for payment mistakes (wrong card number or amount), crediting delays, or bank and payment-system fees.</li>
+        <li>In case of a mistaken payment, the customer contacts their own bank for a refund.</li>
+      </ul>
+
+      <h4>4. Delivery</h4>
+      <ul>
+        <li>We ship with Nova Poshta across Ukraine, to a branch or parcel locker.</li>
+        <li>Orders are shipped within 1–3 business days after the prepayment is confirmed. We send you the tracking number (TTN).</li>
+        <li>Delivery is paid by the recipient at Nova Poshta rates on receipt.</li>
+        <li>Delivery times depend on Nova Poshta. The store is not responsible for delays, loss or damage caused by the carrier: once the parcel is handed over, the carrier is responsible for it.</li>
+        <li>Check your parcel when collecting it. Claims about damaged packaging are filed on the spot with a Nova Poshta employee.</li>
+        <li>If a parcel is not collected in time and comes back, re-shipping is paid by the customer, and return shipping is deducted from any refund.</li>
+      </ul>
+
+      <h4>5. Returns and exchanges</h4>
+      <ul>
+        <li>Items of proper quality can be returned or exchanged within 14 days of receipt if unused, with their original look, stamping and packaging intact.</li>
+        <li><b>Shipping for returns and exchanges is fully paid by the customer</b>, both ways. Cash-on-delivery parcels and returns sent without prior agreement are not accepted.</li>
+        <li>Before returning an item, message us on Telegram @bbcbrand to agree on the return.</li>
+        <li>Refunds, minus shipping costs, are made within 7 business days after we receive and inspect the item.</li>
+        <li>If you find a manufacturing defect, tell us within 3 days of receipt with a photo or video — after checking, we will replace the item or refund you.</li>
+        <li>Not considered defects: the texture and pattern of the material, slight differences in stamping position, a light new-product smell, colour differences due to screen settings.</li>
+      </ul>
+
+      <h4>6. Products and photos</h4>
+      <p>The colour and shade of products in photos and the 3D model may differ slightly from reality due to lighting and screen settings. This is not grounds for a return as a defect. Each cardholder may have small differences in texture.</p>
+
+      <h4>7. Drops and availability</h4>
+      <ul>
+        <li>Quantities are limited. The timer on the website shows the time until sales open (the drop).</li>
+        <li>An item is reserved for you only after the prepayment. Placing an order without paying does not guarantee a reservation.</li>
+        <li>If an item sells out while your order is awaiting payment, we will contact you and offer another colour or refund you in full.</li>
+      </ul>
+
+      <h4>8. Liability</h4>
+      <ul>
+        <li>The store is not responsible for damage caused by improper use or storage of the product.</li>
+        <li>The store is not responsible if it cannot reach the customer because of incorrect contact details.</li>
+        <li>The store is not responsible for the actions of third parties pretending to be the store. Our only official contacts are this website and Telegram @bbcbrand.</li>
+      </ul>
+
+      <h4>9. Personal data</h4>
+      <p>Your details are used only to process and deliver your order and to contact you. We do not share them with third parties other than the delivery service.</p>
+
+      <h4>10. Contacts</h4>
+      <p>All questions about orders, payment, delivery and returns — on Telegram <a href="https://t.me/bbcbrand" target="_blank" rel="noopener">@bbcbrand</a>.</p>
     </article>
+</div>
   </div>
 </div>
 
@@ -408,17 +512,90 @@ form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 (function(){
 'use strict';
 var API = (window.BBC_API || '') + '/api';
-var COLORS = {
-  black:{name:'Чёрный', sw:'#141414', edge:'#1b1b1c', edge2:'#0d0d0e'},
-  red:{name:'Бордовый', sw:'#8e0b0b', edge:'#7a0606', edge2:'#4d0303'},
-  white:{name:'Белый', sw:'#f3f1ee', edge:'#e9e6e2', edge2:'#cfcac4'}
-};
 var ORDER = ['black','red','white'];
-var state = null, demo = false, clockOffset = 0, current = 'black';
+var SW = {black:'#141414', red:'#8e0b0b', white:'#f3f1ee'};
+var EDGE = {black:['#1b1b1c','#0d0d0e'], red:['#7a0606','#4d0303'], white:['#e9e6e2','#cfcac4']};
 
+var I18N = {
+ ru:{
+  title:'BBC BRAND — магазин', aria_home:'BBC BRAND — на главную', aria_menu:'Меню', nav_catalog:'Каталог', nav_delivery:'Доставка',
+  hero_eyebrow:'магазин', hero_lead:'Сейчас в продаже — картхолдеры из эко-кожи с фактурой «под крокодила» и серебряным тиснением в трёх цветах. Доставка Новой Почтой по всей Украине.',
+  hero_cta:'Смотреть каталог', drop_label:'Дроп · картхолдер · через',
+  cat_eyebrow:'каталог', cat_title:'Выбери свой цвет', cat_sub:'Нажми на картхолдер, чтобы посмотреть его ближе, покрутить в 3D и оформить заказ.',
+  f1_t:'Новая Почта', f1_s:'Отправка в отделение или почтомат по всей Украине', f2_t:'1–3 рабочих дня', f2_s:'Отправляем после предоплаты и присылаем ТТН',
+  f3_t:'Предоплата ₴150', f3_s:'Остаток — при получении на Новой Почте', f4_t:'Поддержка', f4_s:'Ответим на вопросы в Telegram @bbcbrand',
+  tg_t:'Дропы и новинки — первыми в канале', tg_s:'Анонсы, таймеры и новые товары BBC BRAND', tg_btn:'Подписаться @bbcbrand',
+  close:'Закрыть', open3d:'Открыть 3D-модель', aria_3d:'3D-модель картхолдера', drag:'Тяни, чтобы покрутить', rules:'Правила магазина',
+  c_black:'Чёрный', c_red:'Бордовый', c_white:'Белый', product:'Картхолдер',
+  in_stock:'В наличии', out:'Нет в наличии', drop_in:'Дроп через', price_soon:'Цена скоро', days_short:'д',
+  cd:['дн','час','мин','сек'],
+  desc:'Картхолдер из эко-кожи с фактурой «под крокодила» и серебряным тиснением по центру.',
+  color:'Цвет', specs:'Характеристики',
+  sp:[['Компактность','продуманный формат 10 × 7,5 см позволяет удобно носить самое необходимое с собой.'],
+      ['Практичность','3 отделения для банковских карт, визиток или пропусков.'],
+      ['Материал','качественная эко-кожа.'],
+      ['Универсальный дизайн','лаконичный стиль и трендовая фактура подойдут как к деловому костюму, так и к повседневному образу.'],
+      ['Упаковка','картхолдер, брендированный пакет, наклейка, визитка, скидка −15% на следующий заказ.']],
+  order:'Заказать', after_timer:'Откроется после таймера', watch_tg:'Следить за дропом в Telegram',
+  note:'Доставка Новой Почтой · предоплата ₴150, остаток при получении',
+  form_lbl:'Оформление заказа', form_title:'Данные для доставки',
+  f_last:'Фамилия', f_first:'Имя', f_phone:'Номер телефона', f_city:'Город', f_np:'Отделение / почтомат НП', f_np_ph:'№ отделения',
+  f_tg:'Telegram для связи (необязательно)', f_cm:'Комментарий (необязательно)',
+  agree_html:'Я ознакомлен(а) с <a href="#" data-r>правилами магазина</a>, условиями оплаты, доставки и возврата',
+  submit:'Оформить заказ', sending:'Отправляем…', back:'Назад',
+  err_fields:'Проверь выделенные поля.', err_agree:'Нужно согласиться с правилами магазина.', err_fail:'Не получилось оформить заказ. Попробуй ещё раз.',
+  err_net:'Нет связи с сервером. Попробуй ещё раз или напиши нам в Telegram.',
+  ok_lbl:'Заказ принят', prepay:'Предоплата ₴150', prepay_hint:'Переведи ₴150 по реквизитам ниже — остаток оплатишь при получении на Новой Почте.',
+  after_pay_html:'После оплаты отправь скрин и номер заказа в Telegram {tg}. Мы отправим посылку и пришлём ТТН.',
+  demo_note:'Это демо-режим: сайт не подключён к боту, заказ никуда не отправлен.', send_screen:'Отправить скрин оплаты',
+  demo_toast:'Демо-режим: подключи сайт к боту, чтобы наличие и заказы работали вживую',
+  theme_to_light:'Светлая тема', theme_to_dark:'Тёмная тема', lang_to:'Switch to English', lang_btn:'EN'
+ },
+ en:{
+  title:'BBC BRAND — store', aria_home:'BBC BRAND — home', aria_menu:'Menu', nav_catalog:'Catalog', nav_delivery:'Delivery',
+  hero_eyebrow:'store', hero_lead:'Now available: eco-leather cardholders with a croc-embossed texture and silver foil stamping, in three colours. Delivery by Nova Poshta across Ukraine.',
+  hero_cta:'View catalog', drop_label:'Drop · cardholder · in',
+  cat_eyebrow:'catalog', cat_title:'Pick your colour', cat_sub:'Tap a cardholder to see it up close, spin it in 3D and place an order.',
+  f1_t:'Nova Poshta', f1_s:'Delivery to any branch or parcel locker in Ukraine', f2_t:'1–3 business days', f2_s:'We ship after prepayment and send you the tracking number',
+  f3_t:'₴150 prepayment', f3_s:'The rest is paid on receipt at Nova Poshta', f4_t:'Support', f4_s:'Ask us anything on Telegram @bbcbrand',
+  tg_t:'Drops and new items — first in our channel', tg_s:'Announcements, timers and new BBC BRAND products', tg_btn:'Follow @bbcbrand',
+  close:'Close', open3d:'Open 3D model', aria_3d:'3D model of the cardholder', drag:'Drag to rotate', rules:'Store rules',
+  c_black:'Black', c_red:'Burgundy', c_white:'White', product:'Cardholder',
+  in_stock:'In stock', out:'Sold out', drop_in:'Drop in', price_soon:'Price soon', days_short:'d',
+  cd:['days','hrs','min','sec'],
+  desc:'Eco-leather cardholder with a croc-embossed texture and silver foil stamping in the centre.',
+  color:'Colour', specs:'Details',
+  sp:[['Compact','a well-thought-out 10 × 7.5 cm format lets you carry the essentials with ease.'],
+      ['Practical','3 slots for bank cards, business cards or passes.'],
+      ['Material','high-quality eco-leather.'],
+      ['Versatile design','a minimal look and on-trend texture go with a business suit as well as everyday outfits.'],
+      ['Packaging','cardholder, branded bag, sticker, business card and −15% off your next order.']],
+  order:'Order', after_timer:'Opens when the timer ends', watch_tg:'Follow the drop on Telegram',
+  note:'Nova Poshta delivery · ₴150 prepayment, rest on receipt',
+  form_lbl:'Checkout', form_title:'Delivery details',
+  f_last:'Last name', f_first:'First name', f_phone:'Phone number', f_city:'City', f_np:'Nova Poshta branch / locker', f_np_ph:'Branch №',
+  f_tg:'Telegram for contact (optional)', f_cm:'Comment (optional)',
+  agree_html:'I have read the <a href="#" data-r>store rules</a> and the payment, delivery and return terms',
+  submit:'Place order', sending:'Sending…', back:'Back',
+  err_fields:'Check the highlighted fields.', err_agree:'Please accept the store rules.', err_fail:'Could not place the order. Please try again.',
+  err_net:'No connection to the server. Try again or message us on Telegram.',
+  ok_lbl:'Order placed', prepay:'₴150 prepayment', prepay_hint:'Send ₴150 using the details below — pay the rest on receipt at Nova Poshta.',
+  after_pay_html:'After paying, send a screenshot and your order number to Telegram {tg}. We will ship your parcel and send the tracking number.',
+  demo_note:'Demo mode: the site is not connected to the bot, so this order was not sent anywhere.', send_screen:'Send payment screenshot',
+  demo_toast:'Demo mode: connect the site to the bot to make stock and orders live',
+  theme_to_light:'Light theme', theme_to_dark:'Dark theme', lang_to:'Переключить на русский', lang_btn:'RU'
+ }
+};
+var root = document.documentElement;
+var lang = root.getAttribute('lang') === 'en' ? 'en' : 'ru';
+function T(k){ return (I18N[lang] && I18N[lang][k] != null) ? I18N[lang][k] : I18N.ru[k]; }
+function cname(k){ return T('c_'+k); }
+
+var state = null, demo = false, clockOffset = 0, current = 'black';
 function now(){ return Date.now() + clockOffset; }
 function $(s, r){ return (r||document).querySelector(s); }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+function store(k, v){ try{ localStorage.setItem(k, v); }catch(e){} }
 
 function demoState(){
   var t = Date.now();
@@ -430,7 +607,6 @@ function demoState(){
       white:{status:'out', drop_at:null, price:null}
     }};
 }
-
 function eff(p){
   if(p.drop_at && now() < p.drop_at) return 'drop';
   if(p.drop_at && now() >= p.drop_at) return 'in_stock';
@@ -441,14 +617,14 @@ function fmtLeft(ms){
   var d = Math.floor(s/86400); s%=86400;
   var h = Math.floor(s/3600), m = Math.floor(s%3600/60), sec = s%60;
   var pad = function(n){return (n<10?'0':'')+n;};
-  return (d? d+'д ' : '') + pad(h)+':'+pad(m)+':'+pad(sec);
+  return (d? d+T('days_short')+' ' : '') + pad(h)+':'+pad(m)+':'+pad(sec);
 }
-function priceText(p){ return p.price ? (Number(p.price).toLocaleString('ru-RU') + ' ' + (state.currency||'₴')) : 'Цена скоро'; }
+function priceText(p){ return p.price ? ((state.currency||'₴') + Number(p.price).toLocaleString(lang==='en'?'en-US':'ru-RU')) : T('price_soon'); }
 function statusHTML(p){
   var e = eff(p);
-  if(e==='in_stock') return '<span class="st-in" style="display:inline-flex;align-items:center;gap:8px"><span class="dot"></span>В наличии</span>';
-  if(e==='drop') return '<span class="st-drop" style="display:inline-flex;align-items:center;gap:8px"><span class="dot"></span>Дроп через <span class="tnum" data-left="'+p.drop_at+'">'+fmtLeft(p.drop_at-now())+'</span></span>';
-  return '<span class="st-out" style="display:inline-flex;align-items:center;gap:8px"><span class="dot"></span>Нет в наличии</span>';
+  if(e==='in_stock') return '<span class="st-in" style="display:inline-flex;align-items:center;gap:8px"><span class="dot"></span>'+T('in_stock')+'</span>';
+  if(e==='drop') return '<span class="st-drop" style="display:inline-flex;align-items:center;gap:8px"><span class="dot"></span>'+T('drop_in')+' <span class="tnum" data-left="'+p.drop_at+'">'+fmtLeft(p.drop_at-now())+'</span></span>';
+  return '<span class="st-out" style="display:inline-flex;align-items:center;gap:8px"><span class="dot"></span>'+T('out')+'</span>';
 }
 
 function load(){
@@ -458,36 +634,23 @@ function load(){
 }
 
 function renderGrid(){
-  renderQuick();
   var g = $('#grid'); g.innerHTML = '';
   ORDER.forEach(function(k){
     var p = state.products[k]; if(!p) return;
     var b = document.createElement('button');
-    b.type='button'; b.className='prod'; b.setAttribute('aria-label','Картхолдер, цвет: '+COLORS[k].name);
-    b.innerHTML = '<div class="badge" data-badge="'+k+'">'+statusHTML(p)+'</div>'+
-      '<div class="ph"><img src="img/'+k+'-sm.jpg" alt="Картхолдер, '+COLORS[k].name.toLowerCase()+'" loading="lazy"></div>'+
-      '<div class="info"><div><h3>Картхолдер</h3><div class="sub">'+COLORS[k].name+'</div></div><div class="price">'+esc(priceText(p))+'</div></div>';
+    b.type='button'; b.className='prod'; b.setAttribute('aria-label', T('product')+': '+cname(k));
+    b.innerHTML = '<div class="badge">'+statusHTML(p)+'</div>'+
+      '<div class="ph"><img src="img/'+k+'-sm.jpg" alt="'+esc(T('product')+', '+cname(k).toLowerCase())+'" loading="lazy"></div>'+
+      '<div class="info"><div><h3>'+T('product')+'</h3><div class="sub">'+cname(k)+'</div></div><div class="price">'+esc(priceText(p))+'</div></div>';
     b.addEventListener('click', function(){ openProduct(k); });
     g.appendChild(b);
   });
 }
-
-function renderQuick(){
-  var q = $('#quick'); if(!q) return; q.innerHTML = '';
-  ORDER.forEach(function(k){
-    var p = state.products[k]; if(!p) return;
-    var b = document.createElement('button'); b.type = 'button'; b.className = 'qbtn';
-    b.innerHTML = '<span class="c" style="background:'+COLORS[k].sw+'"></span><span><b>'+COLORS[k].name+'</b><small>'+statusHTML(p)+'</small></span>'+
-      '<span class="arr" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e8e9ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
-    b.addEventListener('click', function(){ openProduct(k); });
-    q.appendChild(b);
-  });
-}
 function renderHeroDrop(){
   var soon = null;
-  ORDER.forEach(function(k){ var p = state.products[k]; if(p && p.drop_at && p.drop_at > now() && (!soon || p.drop_at < soon.t)) soon = {t:p.drop_at, k:k}; });
+  ORDER.forEach(function(k){ var p = state.products[k]; if(p && p.drop_at && p.drop_at > now() && (!soon || p.drop_at < soon)) soon = p.drop_at; });
   var el = $('#heroDrop');
-  if(soon){ el.classList.add('on'); $('#heroDropLabel').textContent = 'Дроп · '+COLORS[soon.k].name.toLowerCase()+' · через'; $('#heroDropT').textContent = fmtLeft(soon.t-now()); }
+  if(soon){ el.classList.add('on'); $('#heroDropLabel').textContent = T('drop_label'); $('#heroDropT').textContent = fmtLeft(soon-now()); }
   else el.classList.remove('on');
 }
 
@@ -499,63 +662,87 @@ document.querySelectorAll('.modal').forEach(function(m){
   m.addEventListener('click', function(e){ if(e.target===m || e.target.closest('[data-close]')) closeModal(m); });
 });
 document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ var ms = document.querySelectorAll('.modal.open'); if(ms.length) closeModal(ms[ms.length-1]); } });
-document.querySelectorAll('[data-open-rules]').forEach(function(b){ b.addEventListener('click', function(){ openModal('rModal'); }); });
 
 /* product modal */
-function swatches(active, onPick, label){
-  return '<div class="sw" role="group" aria-label="'+label+'">'+ORDER.map(function(k){
-    return '<button type="button" data-c="'+k+'" aria-pressed="'+(k===active)+'" aria-label="'+COLORS[k].name+'"><span style="background:'+COLORS[k].sw+'"></span></button>';
+var SPEC_ICONS = [
+  '<path d="M4 7h16v10H4z"/><path d="M8 4v3M16 4v3M8 17v3M16 17v3"/>',
+  '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M3 14h18"/>',
+  '<path d="M12 3c4 3 6 6 6 9a6 6 0 0 1-12 0c0-3 2-6 6-9z"/>',
+  '<path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/>',
+  '<path d="M4 8h16l-1.5 12h-13z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/>'
+];
+function swatches(active, label){
+  return '<div class="sw" role="group" aria-label="'+esc(label)+'">'+ORDER.map(function(k){
+    return '<button type="button" data-c="'+k+'" aria-pressed="'+(k===active)+'" aria-label="'+esc(cname(k))+'"><span style="background:'+SW[k]+'"></span></button>';
   }).join('')+'</div>';
 }
 function countdownHTML(t){
-  return '<div class="countdown" data-cd="'+t+'">'+['дн','час','мин','сек'].map(function(l){return '<div><b>00</b><small>'+l+'</small></div>';}).join('')+'</div>';
+  return '<div class="countdown" data-cd="'+t+'">'+T('cd').map(function(l){return '<div><b>00</b><small>'+l+'</small></div>';}).join('')+'</div>';
+}
+function specsHTML(){
+  return '<div><div class="label" style="margin-bottom:10px">'+T('specs')+'</div><ul class="specs">'+T('sp').map(function(x,i){
+    return '<li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+SPEC_ICONS[i]+'</svg><span><b>'+esc(x[0])+':</b> '+esc(x[1])+'</span></li>';
+  }).join('')+'</ul></div>';
 }
 function openProduct(k){ current = k; renderProduct(); openModal('pModal'); }
 function renderProduct(){
   var k = current, p = state.products[k], e = eff(p);
-  $('#pImg').src = 'img/'+k+'.jpg'; $('#pImg').alt = 'Картхолдер, '+COLORS[k].name.toLowerCase();
+  $('#pImg').src = 'img/'+k+'.jpg'; $('#pImg').alt = T('product')+', '+cname(k).toLowerCase();
   var btn;
-  if(e==='in_stock') btn = '<button class="btn btn-silver" type="button" id="toOrder">Заказать</button>';
-  else if(e==='drop') btn = '<button class="btn btn-silver" type="button" disabled>Откроется после таймера</button>';
-  else btn = '<a class="btn btn-ghost" href="https://t.me/bbcbrand" target="_blank" rel="noopener">Следить за дропом в Telegram</a>';
+  if(e==='in_stock') btn = '<button class="btn btn-silver" type="button" id="toOrder">'+T('order')+'</button>';
+  else if(e==='drop') btn = '<button class="btn btn-silver" type="button" disabled>'+T('after_timer')+'</button>';
+  else btn = '<a class="btn btn-ghost" href="https://t.me/bbcbrand" target="_blank" rel="noopener">'+T('watch_tg')+'</a>';
   $('#pBody').innerHTML =
-    '<div><div class="label">BBC BRAND</div><h3 id="pTitle" style="margin-top:8px">Картхолдер<br>'+COLORS[k].name.toLowerCase()+'</h3></div>'+
-    '<p class="desc">Картхолдер с фактурой «под крокодила», несколько отделений для карт и серебряное тиснение по центру.</p>'+
-    '<div><div class="label">Цвет · '+COLORS[k].name+'</div>'+swatches(k,null,'Цвет картхолдера')+'</div>'+
+    '<div><div class="label">BBC BRAND</div><h3 id="pTitle" style="margin-top:8px">'+T('product')+'<br>'+cname(k).toLowerCase()+'</h3></div>'+
+    '<p class="desc">'+T('desc')+'</p>'+
+    '<div><div class="label">'+T('color')+' · '+cname(k)+'</div>'+swatches(k, T('color'))+'</div>'+
     '<div class="stline">'+statusHTML(p)+'</div>'+
     (e==='drop' ? countdownHTML(p.drop_at) : '')+
     '<div class="bigprice">'+esc(priceText(p))+'</div>'+
     btn+
-    '<p class="note">Доставка Новой Почтой · предоплата 100%</p>';
+    '<p class="note">'+T('note')+'</p>'+
+    specsHTML();
   $('#pBody').querySelectorAll('.sw button').forEach(function(b){ b.addEventListener('click', function(){ current = b.dataset.c; renderProduct(); }); });
   var o = $('#toOrder'); if(o) o.addEventListener('click', renderForm);
   tick();
 }
-
+var formData = null;
 function renderForm(){
   var k = current, p = state.products[k];
   $('#pBody').innerHTML =
-    '<div><div class="label">Оформление заказа</div><h3 id="pTitle" style="margin-top:8px">Данные для доставки</h3></div>'+
-    '<div class="summary"><img src="img/'+k+'-sm.jpg" alt=""><div><b>Картхолдер</b><div class="note">'+COLORS[k].name+' · '+esc(priceText(p))+'</div></div></div>'+
+    '<div><div class="label">'+T('form_lbl')+'</div><h3 id="pTitle" style="margin-top:8px">'+T('form_title')+'</h3></div>'+
+    '<div class="summary"><img src="img/'+k+'-sm.jpg" alt=""><div><b>'+T('product')+'</b><div class="note">'+cname(k)+' · '+esc(priceText(p))+'</div></div></div>'+
     '<form id="oForm" novalidate>'+
-      '<div class="row"><div class="field"><label for="f_last">Фамилия</label><input id="f_last" name="last_name" autocomplete="family-name" required maxlength="60"></div>'+
-      '<div class="field"><label for="f_first">Имя</label><input id="f_first" name="first_name" autocomplete="given-name" required maxlength="60"></div></div>'+
-      '<div class="field"><label for="f_phone">Номер телефона</label><input id="f_phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+380 __ ___ __ __" required maxlength="20"></div>'+
-      '<div class="row"><div class="field"><label for="f_city">Город</label><input id="f_city" name="city" autocomplete="address-level2" required maxlength="80"></div>'+
-      '<div class="field"><label for="f_np">Отделение / почтомат НП</label><input id="f_np" name="np" inputmode="numeric" placeholder="№ отделения" required maxlength="60"></div></div>'+
-      '<div class="field"><label for="f_tg">Telegram для связи (необязательно)</label><input id="f_tg" name="telegram" placeholder="@username" maxlength="40"></div>'+
-      '<div class="field"><label for="f_cm">Комментарий (необязательно)</label><textarea id="f_cm" name="comment" rows="2" maxlength="300"></textarea></div>'+
-      '<label class="check"><input type="checkbox" id="f_agree" required><span>Я ознакомлен(а) с <a href="#" data-r>правилами магазина</a>, условиями оплаты, доставки и возврата</span></label>'+
+      '<div class="row"><div class="field"><label for="f_last">'+T('f_last')+'</label><input id="f_last" name="last_name" autocomplete="family-name" required maxlength="60"></div>'+
+      '<div class="field"><label for="f_first">'+T('f_first')+'</label><input id="f_first" name="first_name" autocomplete="given-name" required maxlength="60"></div></div>'+
+      '<div class="field"><label for="f_phone">'+T('f_phone')+'</label><input id="f_phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+380 __ ___ __ __" required maxlength="20"></div>'+
+      '<div class="row"><div class="field"><label for="f_city">'+T('f_city')+'</label><input id="f_city" name="city" autocomplete="address-level2" required maxlength="80"></div>'+
+      '<div class="field"><label for="f_np">'+T('f_np')+'</label><input id="f_np" name="np" inputmode="numeric" placeholder="'+esc(T('f_np_ph'))+'" required maxlength="60"></div></div>'+
+      '<div class="field"><label for="f_tg">'+T('f_tg')+'</label><input id="f_tg" name="telegram" placeholder="@username" maxlength="40"></div>'+
+      '<div class="field"><label for="f_cm">'+T('f_cm')+'</label><textarea id="f_cm" name="comment" rows="2" maxlength="300"></textarea></div>'+
+      '<label class="check"><input type="checkbox" id="f_agree" required><span>'+T('agree_html')+'</span></label>'+
       '<div class="formerr" id="ferr" role="alert"></div>'+
-      '<div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-silver" type="submit" id="fsub" style="flex:1">Оформить заказ</button><button class="btn btn-ghost" type="button" id="fback">Назад</button></div>'+
+      '<div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-silver" type="submit" id="fsub" style="flex:1">'+T('submit')+'</button><button class="btn btn-ghost" type="button" id="fback">'+T('back')+'</button></div>'+
     '</form>';
-  $('#fback').addEventListener('click', renderProduct);
+  if(formData){ var f = $('#oForm'); Object.keys(formData).forEach(function(n){ if(f.elements[n]) f.elements[n].value = formData[n]; }); }
+  $('#fback').addEventListener('click', function(){ formData = null; renderProduct(); });
   $('#oForm [data-r]').addEventListener('click', function(e){ e.preventDefault(); openModal('rModal'); });
   $('#f_phone').addEventListener('blur', function(){ var d = this.value.replace(/\D/g,''); if(d.length===10 && d[0]==='0') this.value = '+38'+d; else if(d.length===12 && d.indexOf('380')===0) this.value = '+'+d; });
   $('#oForm').addEventListener('submit', submitOrder);
+  $('#oForm').addEventListener('input', function(){ var f = $('#oForm'); formData = {}; ['last_name','first_name','phone','city','np','telegram','comment'].forEach(function(n){ formData[n] = f.elements[n].value; }); });
   $('#f_last').focus();
 }
-
+var lastOrder = null;
+function renderDone(){
+  var res = lastOrder, tg = (state.contact||'@bbcbrand'), tgu = tg.replace('@','');
+  $('#pBody').innerHTML =
+    '<div class="ok-box"><div class="label">'+T('ok_lbl')+'</div><div class="num silver">№ '+esc(res.id)+'</div>'+
+    '<p class="desc">'+T('product')+' · '+cname(res.color).toLowerCase()+' · '+esc(priceText(state.products[res.color]))+'</p></div>'+
+    '<div><div class="label" style="margin-bottom:8px">'+T('prepay')+'</div><p class="note" style="margin:0 0 10px">'+T('prepay_hint')+'</p><div class="pay">'+esc(res.payment || state.payment || '')+'</div></div>'+
+    '<p class="note">'+T('after_pay_html').replace('{tg}','<a href="https://t.me/'+esc(tgu)+'" target="_blank" rel="noopener">'+esc(tg)+'</a>')+'</p>'+
+    (res.demo ? '<p class="note">'+T('demo_note')+'</p>' : '')+
+    '<a class="btn btn-silver" href="https://t.me/'+esc(tgu)+'" target="_blank" rel="noopener">'+T('send_screen')+'</a>';
+}
 function submitOrder(e){
   e.preventDefault();
   var f = e.target, err = $('#ferr'), bad = [];
@@ -566,35 +753,28 @@ function submitOrder(e){
   var digits = data.phone.replace(/\D/g,'');
   if(digits.length < 10 || digits.length > 13) bad.push('phone');
   bad.forEach(function(n){ f.elements[n].classList.add('err'); });
-  if(bad.length){ err.textContent = 'Проверь выделенные поля.'; f.elements[bad[0]].focus(); return; }
-  if(!$('#f_agree').checked){ err.textContent = 'Нужно согласиться с правилами магазина.'; return; }
+  if(bad.length){ err.textContent = T('err_fields'); f.elements[bad[0]].focus(); return; }
+  if(!$('#f_agree').checked){ err.textContent = T('err_agree'); return; }
   err.textContent = '';
-  var sb = $('#fsub'); sb.disabled = true; sb.textContent = 'Отправляем…';
-  var done = function(res){
-    $('#pBody').innerHTML =
-      '<div class="ok-box"><div class="label">Заказ принят</div><div class="num silver">№ '+esc(res.id)+'</div>'+
-      '<p class="desc">Картхолдер · '+COLORS[current].name.toLowerCase()+' · '+esc(priceText(state.products[current]))+'</p></div>'+
-      '<div><div class="label" style="margin-bottom:8px">Оплата</div><div class="pay">'+esc(res.payment || state.payment || '')+'</div></div>'+
-      '<p class="note">После оплаты отправь скрин и номер заказа в Telegram <a href="https://t.me/'+esc((state.contact||'@bbcbrand').replace('@',''))+'" target="_blank" rel="noopener">'+esc(state.contact||'@bbcbrand')+'</a>. Мы отправим посылку и пришлём ТТН.</p>'+
-      (res.demo ? '<p class="note">Это демо-режим: сайт не подключён к боту, заказ никуда не отправлен.</p>' : '')+
-      '<a class="btn btn-silver" href="https://t.me/'+esc((state.contact||'@bbcbrand').replace('@',''))+'" target="_blank" rel="noopener">Отправить скрин оплаты</a>';
-  };
+  var sb = $('#fsub'); sb.disabled = true; sb.textContent = T('sending');
+  var done = function(res){ res.color = current; lastOrder = res; formData = null; renderDone(); };
   if(demo){ setTimeout(function(){ done({id:'BBC-DEMO', demo:true}); }, 500); return; }
   fetch(API + '/order', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)})
     .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
     .then(function(x){
-      if(!x.ok){ err.textContent = x.j.error || 'Не получилось оформить заказ. Попробуй ещё раз.'; sb.disabled=false; sb.textContent='Оформить заказ'; if(x.j.state){ state = x.j.state; renderGrid(); } return; }
+      if(!x.ok){ err.textContent = x.j.error || T('err_fail'); sb.disabled=false; sb.textContent=T('submit'); if(x.j.state){ state = x.j.state; renderGrid(); } return; }
       done(x.j);
     })
-    .catch(function(){ err.textContent = 'Нет связи с сервером. Попробуй ещё раз или напиши нам в Telegram.'; sb.disabled=false; sb.textContent='Оформить заказ'; });
+    .catch(function(){ err.textContent = T('err_net'); sb.disabled=false; sb.textContent=T('submit'); });
 }
 
 /* ticking */
 var lastEff = '';
+function modalView(){ if(!$('#pModal').classList.contains('open')) return null; if($('#oForm')) return 'form'; if($('.ok-box')) return 'done'; return 'product'; }
 function tick(){
   if(!state) return;
   var sig = ORDER.map(function(k){ return eff(state.products[k]); }).join();
-  if(lastEff && sig !== lastEff){ lastEff = sig; renderGrid(); if($('#pModal').classList.contains('open') && !$('#oForm') && !$('.ok-box')) renderProduct(); }
+  if(lastEff && sig !== lastEff){ lastEff = sig; renderGrid(); if(modalView()==='product') renderProduct(); }
   lastEff = sig;
   document.querySelectorAll('[data-left]').forEach(function(el){ el.textContent = fmtLeft(+el.dataset.left - now()); });
   document.querySelectorAll('[data-cd]').forEach(function(el){
@@ -605,17 +785,54 @@ function tick(){
   renderHeroDrop();
 }
 setInterval(tick, 1000);
-setInterval(function(){ if(demo) return; load().then(function(){ var o = $('#pModal').classList.contains('open') && !$('#oForm') && !$('.ok-box'); renderGrid(); if(o) renderProduct(); tick(); }); }, 20000);
+setInterval(function(){ if(demo) return; load().then(function(){ renderGrid(); if(modalView()==='product') renderProduct(); tick(); }); }, 20000);
+
+/* language */
+function applyLang(){
+  root.setAttribute('lang', lang);
+  document.title = T('title');
+  document.querySelectorAll('[data-i18n]').forEach(function(el){ el.textContent = T(el.getAttribute('data-i18n')); });
+  document.querySelectorAll('[data-i18n-aria]').forEach(function(el){ el.setAttribute('aria-label', T(el.getAttribute('data-i18n-aria'))); });
+  var lb = $('#langBtn'); lb.textContent = T('lang_btn'); lb.setAttribute('aria-label', T('lang_to'));
+  applyThemeLabel();
+  if(state){
+    renderGrid(); tick();
+    var v = modalView();
+    if(v==='product') renderProduct(); else if(v==='form') renderForm(); else if(v==='done') renderDone();
+    if($('#m3d').classList.contains('open')) set3dColor(cur3d);
+  }
+}
+$('#langBtn').addEventListener('click', function(){ lang = lang==='ru' ? 'en' : 'ru'; store('bbc_lang', lang); applyLang(); });
+
+/* theme */
+var SUN = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+var MOON = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
+var v = $('#promo');
+function theme(){ return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark'; }
+function applyThemeLabel(){
+  var light = theme()==='light';
+  $('#themeIco').innerHTML = light ? MOON : SUN;
+  $('#themeBtn').setAttribute('aria-label', light ? T('theme_to_dark') : T('theme_to_light'));
+}
+function applyTheme(){
+  var light = theme()==='light';
+  var src = 'img/promo-' + (light ? 'light' : 'dark') + '.mp4';
+  if(v.getAttribute('src') !== src){ var t = v.currentTime || 0; v.setAttribute('src', src); try{ v.currentTime = t; }catch(e){} var pr = v.play(); if(pr && pr.catch) pr.catch(function(){}); }
+  var mt = document.querySelector('meta[name="theme-color"]'); if(mt) mt.setAttribute('content', light ? '#ffffff' : '#0a0a0a');
+  applyThemeLabel();
+}
+$('#themeBtn').addEventListener('click', function(){ root.setAttribute('data-theme', theme()==='light' ? 'dark' : 'light'); store('bbc_theme', theme()); applyTheme(); });
 
 /* 3D viewer */
-var rx = -14, ry = -28, vx = 0, vy = 0.25, dragging = false, raf = 0, lastX = 0, lastY = 0, idleT = 0;
+var rx = -14, ry = -28, vx = 0, vy = 0.25, dragging = false, raf = 0, lastX = 0, lastY = 0, idleT = 0, cur3d = 'black';
 var obj = $('#obj');
 function set3dColor(k){
+  cur3d = k;
   $('#tFront').src = 'img/'+k+'-front.jpg'; $('#tBack').src = 'img/'+k+'-back.jpg';
-  var c = COLORS[k];
-  document.querySelectorAll('#obj .edge').forEach(function(e,i){ e.style.background = 'linear-gradient(90deg,'+c.edge2+','+c.edge+','+c.edge2+')'; });
-  $('#sw3d').innerHTML = ORDER.map(function(x){ return '<button type="button" data-c="'+x+'" aria-pressed="'+(x===k)+'" aria-label="'+COLORS[x].name+'"><span style="background:'+COLORS[x].sw+'"></span></button>'; }).join('');
-  $('#sw3d').querySelectorAll('button').forEach(function(b){ b.addEventListener('click', function(){ set3dColor(b.dataset.c); }); });
+  document.querySelectorAll('#obj .edge').forEach(function(e){ e.style.background = 'linear-gradient(90deg,'+EDGE[k][1]+','+EDGE[k][0]+','+EDGE[k][1]+')'; });
+  var sw = $('#sw3d'); sw.setAttribute('aria-label', T('color'));
+  sw.innerHTML = ORDER.map(function(x){ return '<button type="button" data-c="'+x+'" aria-pressed="'+(x===k)+'" aria-label="'+esc(cname(x))+'" style="--sel:#e8e9ea"><span style="background:'+SW[x]+';border-color:rgba(255,255,255,.15)"></span></button>'; }).join('');
+  sw.querySelectorAll('button').forEach(function(b){ b.addEventListener('click', function(){ set3dColor(b.dataset.c); }); });
 }
 function render3d(){
   obj.style.transform = 'rotateX('+rx+'deg) rotateY('+ry+'deg)';
@@ -627,7 +844,7 @@ function render3d(){
 function loop(){
   if(!dragging){
     idleT++;
-    if(idleT > 90) vy += (0.35 - vy) * 0.02; // drift back to slow auto spin
+    if(idleT > 90) vy += (0.35 - vy) * 0.02;
     ry += vy; rx += vx; vx *= 0.94; vy *= (idleT > 90 ? 1 : 0.96);
     rx += (-14 - rx) * 0.02;
   }
@@ -646,7 +863,8 @@ $('#open3d').addEventListener('click', function(){ set3dColor(current); rx = -14
 
 /* boot */
 $('#yr').textContent = new Date().getFullYear();
-load().then(function(){ renderGrid(); tick(); if(demo) toast('Демо-режим: подключи сайт к боту, чтобы наличие и заказы работали вживую'); });
+applyLang(); applyTheme();
+load().then(function(){ renderGrid(); tick(); if(demo) toast(T('demo_toast')); });
 var tt;
 function toast(t){ var el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(tt); tt = setTimeout(function(){ el.classList.remove('show'); }, 4200); }
 })();

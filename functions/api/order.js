@@ -25,14 +25,23 @@ export async function onRequestPost({ request, env }) {
   const o = {
     color: d.color,
     last_name: clean(d.last_name, 60), first_name: clean(d.first_name, 60),
-    phone: clean(d.phone, 20), city: clean(d.city, 80), np: clean(d.np, 60),
+    phone: clean(d.phone, 20), city: clean(d.city, 80),
     telegram: clean(d.telegram, 40), comment: clean(d.comment, 300),
+    delivery: d.delivery === "eu" ? "eu" : "ua",
   };
+  if (o.delivery === "eu") {
+    o.country = clean(d.country, 60); o.zip = clean(d.zip, 12); o.address = clean(d.address, 160);
+  } else {
+    o.np = clean(d.np, 60);
+  }
+  o.prepay = o.delivery === "eu" ? 390 : 150;
   if (!COLORS[o.color]) return json({ error: "Неизвестный цвет" }, 400);
-  for (const [f, nm] of [["last_name", "фамилию"], ["first_name", "имя"], ["city", "город"], ["np", "отделение НП"]])
-    if (!o[f]) return json({ error: `Укажи ${nm}` }, 400);
+  const need = o.delivery === "eu"
+    ? [["last_name", "фамилию"], ["first_name", "имя"], ["country", "страну"], ["city", "город"], ["zip", "индекс"], ["address", "адрес"]]
+    : [["last_name", "фамилию"], ["first_name", "имя"], ["city", "город"], ["np", "отделение НП"]];
+  for (const [f, nm] of need) if (!o[f]) return json({ error: `Укажи ${nm}` }, 400);
   const digits = o.phone.replace(/\D/g, "");
-  if (digits.length < 10 || digits.length > 13) return json({ error: "Проверь номер телефона" }, 400);
+  if (digits.length < (o.delivery === "eu" ? 8 : 10) || digits.length > 15) return json({ error: "Проверь номер телефона" }, 400);
 
   try {
     const st = await load(env);
@@ -50,7 +59,7 @@ export async function onRequestPost({ request, env }) {
     await Promise.all(adminIds(env).map((id) =>
       tg(env, "sendMessage", { chat_id: id, text: "🔔 Новый заказ с сайта!\n\n" + orderText(o), parse_mode: "HTML", reply_markup: orderKeyboard(o) })
     ));
-    return json({ ok: true, id: o.id, payment: st.payment });
+    return json({ ok: true, id: o.id, delivery: o.delivery, prepay: o.prepay, payment: st.payment });
   } catch (e) {
     return json({ error: "Ошибка сервера. Попробуй ещё раз или напиши нам в Telegram." }, 500);
   }

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Проверка подлинности — BBC BRAND</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="/img/logo.png">
+<script>
+(function(){
+  try{
+    var t = localStorage.getItem('bbc_theme'); if(t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    var l = localStorage.getItem('bbc_lang');
+    if(!l) l = (navigator.language || 'ru').slice(0,2) === 'en' ? 'en' : 'ru';
+    document.documentElement.setAttribute('lang', l);
+  }catch(e){}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#0a0a0a; --bg2:#111213; --line:#232527; --onyx:#353839;
+  --text:#f2f2f3; --muted:#8f9195; --dim:#5f6165;
+  --stage:radial-gradient(ellipse at 50% 45%,#202224 0%,#0a0a0a 68%);
+  --silver:linear-gradient(100deg,#8e9095 0%,#f4f5f6 35%,#a7a9ad 55%,#eceef0 78%,#9a9ca1 100%);
+  --ok:#e9eaeb; --okbg:#151617; --bad:#ef6b6b; --shadow:rgba(0,0,0,.7);
+}
+html[data-theme="light"]{
+  --bg:#f4f4f2; --bg2:#ffffff; --line:#e3e3e0; --onyx:#d6d6d3;
+  --text:#0b0b0c; --muted:#6b6d71; --dim:#9a9ca0;
+  --stage:radial-gradient(ellipse at 50% 45%,#ffffff 0%,#f4f4f2 68%);
+  --silver:linear-gradient(100deg,#2a2b2d 0%,#6d7075 40%,#1b1c1e 70%,#55585c 100%);
+  --ok:#0b0b0c; --okbg:#ffffff; --shadow:rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:Montserrat,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+.page{max-width:520px;margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 22px calc(28px + env(safe-area-inset-bottom));min-height:100vh;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;justify-content:space-between;min-height:44px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;letter-spacing:.2em;font-size:13px}
+.logo-b{width:30px;height:25px;background:var(--silver);-webkit-mask:url(/img/logo.png) center/contain no-repeat;mask:url(/img/logo.png) center/contain no-repeat}
+.tools{display:flex;gap:4px}
+.tools button{background:none;border:0;min-width:44px;min-height:44px;border-radius:12px;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.08em}
+.tools button:hover{color:var(--text)}
+.tools svg{width:18px;height:18px;vertical-align:middle}
+
+.verdict{text-align:center;margin-top:26px}
+.badge{width:64px;height:64px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:var(--okbg);border:1px solid var(--line);box-shadow:0 10px 30px var(--shadow)}
+.badge svg{width:30px;height:30px}
+.badge .ck{stroke-dasharray:30;stroke-dashoffset:30;animation:draw .7s .25s cubic-bezier(.6,0,.2,1) forwards}
+.badge .ring{transform-origin:50% 50%;animation:pop .5s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+h1{margin:0;font-size:24px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+h1 .silver{background:var(--silver);-webkit-background-clip:text;background-clip:text;color:transparent}
+.verdict p{margin:10px auto 0;max-width:340px;color:var(--muted);font-size:13.5px;line-height:1.55;text-wrap:pretty}
+
+.stage{position:relative;height:300px;margin:8px -22px 0;display:grid;place-items:center;perspective:1100px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;background:var(--stage)}
+.stage:active{cursor:grabbing}
+.obj{position:relative;width:250px;height:170px;transform-style:preserve-3d}
+.face{position:absolute;left:0;top:0;width:250px;height:170px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;overflow:hidden;background:#111}
+.face img{width:100%;height:100%;object-fit:cover;display:block}
+.f-front{transform:translateZ(4px)}
+.f-back{transform:rotateY(180deg) translateZ(4px)}
+.edge{position:absolute;backface-visibility:visible;border-radius:2px}
+.e-l,.e-r{width:8px;height:160px;top:5px}
+.e-l{left:-4px;transform:rotateY(-90deg)}
+.e-r{left:246px;transform:rotateY(90deg)}
+.e-t,.e-b{width:240px;height:8px;left:5px}
+.e-t{top:-4px;transform:rotateX(90deg)}
+.e-b{top:166px;transform:rotateX(-90deg)}
+.gloss{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen}
+.shadow{position:absolute;left:50%;bottom:34px;width:230px;height:30px;margin-left:-115px;background:radial-gradient(closest-side,var(--shadow),transparent);filter:blur(5px);pointer-events:none}
+.hint{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+
+.info{margin-top:6px}
+.name{font-size:15px;font-weight:700;letter-spacing:.02em}
+.num{display:flex;align-items:baseline;gap:8px;margin-top:6px}
+.num b{font-size:46px;font-weight:800;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums;background:var(--silver);-webkit-background-clip:text;background-clip:text;color:transparent}
+.num span{font-size:15px;color:var(--muted);font-weight:600;font-variant-numeric:tabular-nums}
+.rows{margin-top:18px;border-top:1px solid var(--line)}
+.row{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.row dt{color:var(--muted)}
+.row dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.08em}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:-1px;border:1px solid rgba(128,128,128,.35)}
+
+.cta{margin-top:26px;display:grid;gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;border-radius:14px;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:.04em}
+.btn.main{background:var(--text);color:var(--bg)}
+.btn.ghost{border:1px solid var(--line);color:var(--text)}
+.btn svg{width:18px;height:18px}
+.foot{margin-top:auto;padding-top:28px;text-align:center;font-size:11px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+
+.bad .badge{border-color:rgba(239,107,107,.4)}
+.bad h1{color:var(--bad)}
+.skel{opacity:.45}
+.hide{display:none!important}
+.fade{animation:fade .5s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.badge .ck,.badge .ring,.fade{animation:none;stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <a class="brand" href="/"><span class="logo-b" aria-hidden="true"></span>BBC BRAND</a>
+    <div class="tools">
+      <button type="button" id="langBtn" aria-label="Language">EN</button>
+      <button type="button" id="themeBtn" aria-label="Theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    </div>
+  </div>
+
+  <section class="verdict" id="verdict">
+    <div class="badge" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" id="icon"><path class="ck" d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+    </div>
+    <h1 id="title"><span data-t="checking">Проверяем…</span></h1>
+    <p id="sub"></p>
+  </section>
+
+  <div id="body" class="hide">
+    <div class="stage" id="stage" aria-label="3D">
+      <div class="obj" id="obj">
+        <div class="face f-front"><img id="tFront" alt="" draggable="false"><div class="gloss" id="glossF"></div></div>
+        <div class="face f-back"><img id="tBack" alt="" draggable="false"><div class="gloss" id="glossB"></div></div>
+        <div class="edge e-l"></div><div class="edge e-r"></div><div class="edge e-t"></div><div class="edge e-b"></div>
+      </div>
+      <div class="shadow" aria-hidden="true"></div>
+      <div class="hint" data-t="drag">Покрути модель</div>
+    </div>
+
+    <div class="info fade">
+      <div class="name" id="name"></div>
+      <div class="num"><b id="num">№ 000</b><span id="total">/ 500</span></div>
+      <dl class="rows">
+        <div class="row"><dt data-t="code">Код паспорта</dt><dd class="mono" id="code">—</dd></div>
+        <div class="row"><dt data-t="color">Цвет</dt><dd id="color">—</dd></div>
+        <div class="row"><dt data-t="first">Первая проверка</dt><dd id="first">—</dd></div>
+        <div class="row"><dt data-t="scans">Проверок</dt><dd id="scans">—</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="cta">
+    <a class="btn main" href="/"><span data-t="shop">Перейти в магазин</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="btn ghost" href="https://t.me/bbcbrand" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.7 19.5c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.2-8.3c.4-.4-.1-.6-.6-.2L6.1 13.2 1.2 11.7c-1.1-.3-1.1-1.1.2-1.6L20.5 2.8c.9-.3 1.7.2 1.4 1.5z"/></svg>@bbcbrand</a>
+  </div>
+
+  <div class="foot">bbcbrand.pages.dev</div>
+</main>
+
+<script>
+(function(){
+var $ = function(s){ return document.querySelector(s); };
+var I18N = {
+  ru:{checking:'Проверяем…', ok_t:'Оригинал', ok_s:'Этот картхолдер прошёл проверку подлинности. NFC-метка зарегистрирована в базе BBC BRAND.',
+      bad_t:'Метка не найдена', bad_s:'Такого кода нет в базе BBC BRAND. Возможно, это подделка — напиши нам в Telegram @bbcbrand.',
+      err_t:'Нет связи', err_s:'Не удалось проверить метку. Проверь интернет и отсканируй ещё раз.',
+      drag:'Покрути модель', code:'Код паспорта', color:'Цвет', first:'Первая проверка', scans:'Проверок', shop:'Перейти в магазин',
+      product:'Картхолдер BBC BRAND', now:'сейчас', black:'Чёрный', red:'Бордовый', white:'Белый', title:'Проверка подлинности — BBC BRAND'},
+  en:{checking:'Checking…', ok_t:'Authentic', ok_s:'This cardholder has passed the authenticity check. Its NFC tag is registered in the BBC BRAND database.',
+      bad_t:'Tag not found', bad_s:'This code is not in the BBC BRAND database. It may be a fake — message us on Telegram @bbcbrand.',
+      err_t:'No connection', err_s:'Could not verify the tag. Check your connection and scan again.',
+      drag:'Spin the model', code:'Passport code', color:'Colour', first:'First check', scans:'Checks', shop:'Go to the store',
+      product:'BBC BRAND Cardholder', now:'just now', black:'Black', red:'Burgundy', white:'White', title:'Authenticity check — BBC BRAND'}
+};
+var SW = {black:'#141414', red:'#8e0b0b', white:'#f3f1ee'};
+var EDGE = {black:['#1b1b1c','#0d0d0e'], red:['#7a0606','#4d0303'], white:['#e9e6e2','#cfcac4']};
+var lang = document.documentElement.lang === 'en' ? 'en' : 'ru';
+var state = 'load', data = null;
+function T(k){ return I18N[lang][k]; }
+
+function pad(n, total){ var w = Math.max(3, String(total).length); return String(n).padStart(w, '0'); }
+function fmtDate(ms){
+  try{ return new Date(ms).toLocaleDateString(lang === 'en' ? 'en-GB' : 'ru-RU', {day:'numeric', month:'long', year:'numeric', timeZone:'Europe/Kyiv'}); }
+  catch(e){ return new Date(ms).toLocaleDateString(); }
+}
+
+function render(){
+  document.title = T('title');
+  document.querySelectorAll('[data-t]').forEach(function(el){ el.textContent = T(el.dataset.t); });
+  $('#langBtn').textContent = lang === 'en' ? 'RU' : 'EN';
+  var v = $('#verdict');
+  if(state === 'load') return;
+  if(state === 'ok'){
+    v.classList.remove('bad');
+    $('#title').innerHTML = esc(T('ok_t')) + ' <span class="silver">BBC</span>';
+    $('#sub').textContent = T('ok_s');
+    $('#name').textContent = T('product') + ' — ' + T(data.color);
+    $('#num').textContent = '№ ' + pad(data.n, data.total);
+    $('#total').textContent = '/ ' + data.total;
+    $('#code').textContent = data.code;
+    $('#color').innerHTML = '<span class="dot" style="background:'+SW[data.color]+'"></span>' + esc(T(data.color));
+    $('#first').textContent = data.first_scan ? fmtDate(data.first_scan) : T('now');
+    $('#scans').textContent = data.scans;
+  } else {
+    v.classList.add('bad');
+    $('#icon').innerHTML = '<path class="ck" d="M7 7l10 10M17 7 7 17" stroke="var(--bad)"/>';
+    $('#title').textContent = T(state === 'bad' ? 'bad_t' : 'err_t');
+    $('#sub').textContent = T(state === 'bad' ? 'bad_s' : 'err_s');
+  }
+}
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+/* 3D */
+var obj = $('#obj'), rx = -12, ry = -30, vx = 0, vy = 0.45, dragging = false, lastX = 0, lastY = 0, idle = 100;
+function setColor(k){
+  $('#tFront').src = '/img/' + k + '-front.jpg';
+  $('#tBack').src = '/img/' + k + '-back.jpg';
+  document.querySelectorAll('#obj .edge').forEach(function(e){ e.style.background = 'linear-gradient(90deg,'+EDGE[k][1]+','+EDGE[k][0]+','+EDGE[k][1]+')'; });
+}
+function frame(){
+  if(!dragging){
+    idle++;
+    if(idle > 60) vy += (0.45 - vy) * 0.02;
+    ry += vy; rx += vx; vx *= 0.94;
+    rx += (-12 - rx) * 0.03;
+  }
+  obj.style.transform = 'rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
+  var a = ((ry % 360) + 360) % 360;
+  var g = 'radial-gradient(ellipse 60% 80% at ' + (50 + Math.sin(a * Math.PI / 180) * 60) + '% ' + (30 - rx) + '%, rgba(255,255,255,.26), rgba(255,255,255,0) 60%)';
+  $('#glossF').style.background = g; $('#glossB').style.background = g;
+  requestAnimationFrame(frame);
+}
+var stage = $('#stage');
+stage.addEventListener('pointerdown', function(e){ dragging = true; lastX = e.clientX; lastY = e.clientY; vx = vy = 0; stage.setPointerCapture(e.pointerId); });
+stage.addEventListener('pointermove', function(e){
+  if(!dragging) return;
+  var dx = e.clientX - lastX, dy = e.clientY - lastY; lastX = e.clientX; lastY = e.clientY;
+  ry += dx * 0.55; rx = Math.max(-60, Math.min(60, rx - dy * 0.4)); vy = dx * 0.55; vx = -dy * 0.4;
+});
+['pointerup','pointercancel'].forEach(function(t){ stage.addEventListener(t, function(){ dragging = false; idle = 0; }); });
+
+/* controls */
+$('#langBtn').addEventListener('click', function(){ lang = lang === 'en' ? 'ru' : 'en'; document.documentElement.lang = lang; try{ localStorage.setItem('bbc_lang', lang); }catch(e){} render(); });
+$('#themeBtn').addEventListener('click', function(){
+  var t = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', t); try{ localStorage.setItem('bbc_theme', t); }catch(e){}
+});
+
+/* load */
+var q = new URLSearchParams(location.search);
+var code = q.get('c') || (location.pathname.match(/\/id\/([^/?#]+)/) || [])[1] || '';
+render();
+if(!code){ state = 'bad'; render(); }
+else fetch('/api/tag?c=' + encodeURIComponent(code) + (q.get('peek') === '1' ? '&peek=1' : ''), {cache:'no-store'})
+  .then(function(r){ return r.json().then(function(j){ return [r.status, j]; }); })
+  .then(function(res){
+    if(res[1] && res[1].ok){ data = res[1]; state = 'ok'; setColor(data.color); $('#body').classList.remove('hide'); requestAnimationFrame(frame); }
+    else state = res[0] === 404 || res[0] === 400 ? 'bad' : 'err';
+    render();
+  })
+  .catch(function(){ state = 'err'; render(); });
+})();
+</script>
+</body>
+</html>

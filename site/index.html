@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BBC BRAND — магазин</title>
-<meta name="description" content="BBC BRAND — картхолдеры из эко-кожи с серебряным тиснением: чёрный, бордовый, белый. Доставка Новой Почтой по Украине.">
+<meta name="description" content="BBC BRAND — картхолдеры из эко-кожи с серебряным тиснением: чёрный, бордовый, белый. Доставка по Украине и Европе.">
 <meta name="theme-color" content="#0a0a0a">
 <link rel="icon" href="img/logo.png">
 <script>
@@ -159,6 +159,11 @@ footer{border-top:1px solid var(--line);padding:36px 0 50px;color:var(--muted);f
 @media (max-width:820px){.pm{grid-template-columns:1fr}.pm .media{min-height:0;aspect-ratio:4/5}.pm .body{padding:24px 20px}.modal{padding:0;align-items:flex-end}.sheet{border-radius:22px 22px 0 0;max-height:94vh}}
 
 /* form */
+#oForm[data-d="ua"] .eu-only,#oForm[data-d="eu"] .ua-only{display:none}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;border:1px solid var(--line);border-radius:14px;background:var(--field)}
+.seg button{min-height:44px;border:0;border-radius:10px;background:none;color:var(--muted);font-weight:700;font-size:14px}
+.seg button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
+.dlv-note{margin:8px 0 0;font-size:12.5px;color:var(--muted)}
 form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media (max-width:480px){form .row{grid-template-columns:1fr}}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
@@ -266,7 +271,7 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
       <div>
         <span class="eyebrow"><i></i><span data-i18n="hero_eyebrow">магазин</span><i></i></span>
         <h1><span class="silver">BBC</span><br>BRAND</h1>
-        <p class="lead" data-i18n="hero_lead">Сейчас в продаже — картхолдеры из эко-кожи с фактурой «под крокодила» и серебряным тиснением в трёх цветах. Доставка Новой Почтой по всей Украине.</p>
+        <p class="lead" data-i18n="hero_lead">Сейчас в продаже — картхолдеры из эко-кожи с фактурой «под крокодила» и серебряным тиснением в трёх цветах. Доставка по Украине и всей Европе.</p>
         <div class="cta">
           <a class="btn btn-silver" href="#catalog" data-i18n="hero_cta">Смотреть каталог</a>
           <a class="btn btn-ghost" href="https://t.me/bbcbrand" target="_blank" rel="noopener">Telegram</a>
@@ -295,9 +300,9 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
   <section id="delivery" style="padding-top:0">
     <div class="wrap">
       <div class="feat">
-        <div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg><b data-i18n="f1_t">Новая Почта</b><span data-i18n="f1_s">Отправка в отделение или почтомат по всей Украине</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg><b data-i18n="f1_t">Украина и Европа</b><span data-i18n="f1_s">Новая Почта по Украине и доставка по всей Европе</span></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b data-i18n="f2_t">1–3 рабочих дня</b><span data-i18n="f2_s">Отправляем после предоплаты и присылаем ТТН</span></div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg><b data-i18n="f3_t">Предоплата ₴150</b><span data-i18n="f3_s">Остаток — при получении на Новой Почте</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h3"/></svg><b data-i18n="f3_t">Предоплата от ₴150</b><span data-i18n="f3_s">Украина — ₴150, Европа — от ₴390</span></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><b data-i18n="f4_t">Поддержка</b><span data-i18n="f4_s">Ответим на вопросы в Telegram @bbcbrand</span></div>
       </div>
     </div>
@@ -373,7 +378,7 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
 
       <h4>2. Оформление заказа</h4>
       <ul>
-        <li>Для заказа нужно указать фамилию, имя, номер телефона, город и номер отделения или почтомата Новой Почты.</li>
+        <li>Для заказа по Украине нужно указать фамилию, имя, номер телефона, город и номер отделения или почтомата Новой Почты. Для заказа в Европу — страну, город, адрес и почтовый индекс.</li>
         <li>Покупатель несёт полную ответственность за правильность указанных данных. Если посылка ушла не туда из-за ошибки в данных, повторная отправка оплачивается покупателем.</li>
         <li>Заказ считается подтверждённым только после поступления предоплаты. Неоплаченный заказ может быть отменён без уведомления.</li>
         <li>Магазин вправе отказать в оформлении заказа без объяснения причин. В этом случае оплаченные средства возвращаются в полном объёме.</li>
@@ -381,8 +386,9 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
 
       <h4>3. Оплата</h4>
       <ul>
-        <li>Для подтверждения заказа вносится предоплата <b>₴150</b>. Реквизиты показываются сразу после оформления заказа на сайте.</li>
-        <li>Остаток суммы оплачивается при получении посылки на Новой Почте (наложенный платёж). Комиссию Новой Почты за наложенный платёж оплачивает покупатель.</li>
+        <li>Для подтверждения заказа по Украине вносится предоплата <b>₴150</b>. Реквизиты показываются сразу после оформления заказа на сайте.</li>
+        <li>Для заказа с доставкой в Европу предоплата — <b>от ₴390</b>: она покрывает международную доставку. Точную сумму для вашей страны и порядок оплаты остатка подтверждает менеджер в Telegram <b>@bbcbrand</b>.</li>
+        <li>По Украине остаток суммы оплачивается при получении посылки на Новой Почте (наложенный платёж). Комиссию Новой Почты за наложенный платёж оплачивает покупатель.</li>
         <li>Предоплата не возвращается, если покупатель отказался от посылки или не забрал её в срок хранения: она покрывает стоимость отправки и возврата.</li>
         <li>После оплаты обязательно отправьте скрин или квитанцию в Telegram <b>@bbcbrand</b> и укажите номер заказа.</li>
         <li>Магазин не несёт ответственности за денежные средства, отправленные по реквизитам, полученным не с этого сайта и не из официального Telegram-канала @bbcbrand. Мы никогда не просим оплату через третьих лиц.</li>
@@ -392,7 +398,8 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
 
       <h4>4. Доставка</h4>
       <ul>
-        <li>Доставка осуществляется Новой Почтой по Украине в отделение или почтомат.</li>
+        <li>По Украине доставка осуществляется Новой Почтой в отделение или почтомат.</li>
+        <li>По Европе доставка осуществляется международной службой Nova Post (Новая Почта) на адрес или в отделение. Срок — обычно 5–10 рабочих дней после отправки. Таможенные пошлины и сборы страны получателя, если они есть, оплачивает покупатель.</li>
         <li>Отправка — в течение 1–3 рабочих дней после подтверждения предоплаты. Номер ТТН мы отправляем покупателю.</li>
         <li>Стоимость доставки оплачивается получателем по тарифам Новой Почты при получении посылки.</li>
         <li>Сроки доставки зависят от Новой Почты. Магазин не несёт ответственности за задержки, утерю или повреждение посылки по вине перевозчика — после передачи посылки перевозчику ответственность за её сохранность несёт перевозчик.</li>
@@ -442,7 +449,7 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
 
       <h4>2. Placing an order</h4>
       <ul>
-        <li>To order, enter your last name, first name, phone number, city and Nova Poshta branch or parcel locker number.</li>
+        <li>For delivery in Ukraine, enter your last name, first name, phone number, city and Nova Poshta branch or parcel locker number. For delivery to Europe, enter your country, city, address and postcode.</li>
         <li>The customer is fully responsible for the accuracy of the details provided. If a parcel is sent to the wrong place because of incorrect details, re-shipping is paid by the customer.</li>
         <li>An order is confirmed only after the prepayment is received. An unpaid order may be cancelled without notice.</li>
         <li>The store may decline an order without giving a reason. In that case, any money paid is refunded in full.</li>
@@ -450,8 +457,9 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
 
       <h4>3. Payment</h4>
       <ul>
-        <li>A prepayment of <b>₴150</b> is required to confirm the order. Payment details are shown right after you place the order on the website.</li>
-        <li>The rest is paid on receipt at Nova Poshta (cash on delivery). Nova Poshta's cash-on-delivery fee is paid by the customer.</li>
+        <li>For orders within Ukraine, a prepayment of <b>₴150</b> is required to confirm the order. Payment details are shown right after you place the order on the website.</li>
+        <li>For delivery to Europe, the prepayment is <b>from ₴390</b>: it covers international shipping. The exact amount for your country and how the rest is paid are confirmed by our manager on Telegram <b>@bbcbrand</b>.</li>
+        <li>In Ukraine, the rest is paid on receipt at Nova Poshta (cash on delivery). Nova Poshta's cash-on-delivery fee is paid by the customer.</li>
         <li>The prepayment is not refunded if the customer refuses the parcel or does not collect it within the storage period: it covers shipping and return costs.</li>
         <li>After paying, send a screenshot or receipt to Telegram <b>@bbcbrand</b> with your order number.</li>
         <li>The store is not responsible for money sent to payment details obtained anywhere other than this website or the official Telegram channel @bbcbrand. We never ask for payment through third parties.</li>
@@ -461,7 +469,8 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
 
       <h4>4. Delivery</h4>
       <ul>
-        <li>We ship with Nova Poshta across Ukraine, to a branch or parcel locker.</li>
+        <li>In Ukraine we ship with Nova Poshta to a branch or parcel locker.</li>
+        <li>Across Europe we ship with Nova Post international delivery, to your address or a branch. Delivery usually takes 5–10 business days after dispatch. Any customs duties or fees in the destination country are paid by the customer.</li>
         <li>Orders are shipped within 1–3 business days after the prepayment is confirmed. We send you the tracking number (TTN).</li>
         <li>Delivery is paid by the recipient at Nova Poshta rates on receipt.</li>
         <li>Delivery times depend on Nova Poshta. The store is not responsible for delays, loss or damage caused by the carrier: once the parcel is handed over, the carrier is responsible for it.</li>
@@ -519,11 +528,11 @@ var EDGE = {black:['#1b1b1c','#0d0d0e'], red:['#7a0606','#4d0303'], white:['#e9e
 var I18N = {
  ru:{
   title:'BBC BRAND — магазин', aria_home:'BBC BRAND — на главную', aria_menu:'Меню', nav_catalog:'Каталог', nav_delivery:'Доставка',
-  hero_eyebrow:'магазин', hero_lead:'Сейчас в продаже — картхолдеры из эко-кожи с фактурой «под крокодила» и серебряным тиснением в трёх цветах. Доставка Новой Почтой по всей Украине.',
+  hero_eyebrow:'магазин', hero_lead:'Сейчас в продаже — картхолдеры из эко-кожи с фактурой «под крокодила» и серебряным тиснением в трёх цветах. Доставка по Украине и всей Европе.',
   hero_cta:'Смотреть каталог', drop_label:'Дроп · картхолдер · через',
   cat_eyebrow:'каталог', cat_title:'Выбери свой цвет', cat_sub:'Нажми на картхолдер, чтобы посмотреть его ближе, покрутить в 3D и оформить заказ.',
-  f1_t:'Новая Почта', f1_s:'Отправка в отделение или почтомат по всей Украине', f2_t:'1–3 рабочих дня', f2_s:'Отправляем после предоплаты и присылаем ТТН',
-  f3_t:'Предоплата ₴150', f3_s:'Остаток — при получении на Новой Почте', f4_t:'Поддержка', f4_s:'Ответим на вопросы в Telegram @bbcbrand',
+  f1_t:'Украина и Европа', f1_s:'Новая Почта по Украине и доставка по всей Европе', f2_t:'1–3 рабочих дня', f2_s:'Отправляем после предоплаты и присылаем ТТН',
+  f3_t:'Предоплата от ₴150', f3_s:'Украина — ₴150, Европа — от ₴390', f4_t:'Поддержка', f4_s:'Ответим на вопросы в Telegram @bbcbrand',
   tg_t:'Дропы и новинки — первыми в канале', tg_s:'Анонсы, таймеры и новые товары BBC BRAND', tg_btn:'Подписаться @bbcbrand',
   close:'Закрыть', open3d:'Открыть 3D-модель', aria_3d:'3D-модель картхолдера', drag:'Тяни, чтобы покрутить', rules:'Правила магазина',
   c_black:'Чёрный', c_red:'Бордовый', c_white:'Белый', product:'Картхолдер',
@@ -537,10 +546,13 @@ var I18N = {
       ['Универсальный дизайн','лаконичный стиль и трендовая фактура подойдут как к деловому костюму, так и к повседневному образу.'],
       ['Упаковка','картхолдер, брендированный пакет, наклейка, визитка, скидка −15% на следующий заказ.']],
   order:'Заказать', after_timer:'Откроется после таймера', watch_tg:'Следить за дропом в Telegram',
-  note:'Доставка Новой Почтой · предоплата ₴150, остаток при получении',
+  note:'Украина: Новая Почта, предоплата ₴150 · Европа: предоплата от ₴390',
   form_lbl:'Оформление заказа', form_title:'Данные для доставки',
   f_last:'Фамилия', f_first:'Имя', f_phone:'Номер телефона', f_city:'Город', f_np:'Отделение / почтомат НП', f_np_ph:'№ отделения',
   f_tg:'Telegram для связи (необязательно)', f_cm:'Комментарий (необязательно)',
+  f_dlv:'Доставка', d_ua:'Украина', d_eu:'Европа', f_country:'Страна', f_zip:'Индекс', f_addr:'Адрес (улица, дом, квартира)',
+  dn_ua:'Новая Почта · 1–3 дня · предоплата ₴150, остаток при получении', dn_eu:'Nova Post по Европе · 5–10 дней · предоплата от ₴390 — точную сумму для твоей страны подтвердит менеджер',
+  prepay_eu:'Предоплата от ₴390', prepay_hint_eu:'Переведи ₴390 по реквизитам ниже. Если доставка в твою страну дороже, менеджер напишет точную сумму и как оплатить остаток.',
   agree_html:'Я ознакомлен(а) с <a href="#" data-r>правилами магазина</a>, условиями оплаты, доставки и возврата',
   submit:'Оформить заказ', sending:'Отправляем…', back:'Назад',
   err_fields:'Проверь выделенные поля.', err_agree:'Нужно согласиться с правилами магазина.', err_fail:'Не получилось оформить заказ. Попробуй ещё раз.',
@@ -553,11 +565,11 @@ var I18N = {
  },
  en:{
   title:'BBC BRAND — store', aria_home:'BBC BRAND — home', aria_menu:'Menu', nav_catalog:'Catalog', nav_delivery:'Delivery',
-  hero_eyebrow:'store', hero_lead:'Now available: eco-leather cardholders with a croc-embossed texture and silver foil stamping, in three colours. Delivery by Nova Poshta across Ukraine.',
+  hero_eyebrow:'store', hero_lead:'Now available: eco-leather cardholders with a croc-embossed texture and silver foil stamping, in three colours. Delivery across Ukraine and all of Europe.',
   hero_cta:'View catalog', drop_label:'Drop · cardholder · in',
   cat_eyebrow:'catalog', cat_title:'Pick your colour', cat_sub:'Tap a cardholder to see it up close, spin it in 3D and place an order.',
-  f1_t:'Nova Poshta', f1_s:'Delivery to any branch or parcel locker in Ukraine', f2_t:'1–3 business days', f2_s:'We ship after prepayment and send you the tracking number',
-  f3_t:'₴150 prepayment', f3_s:'The rest is paid on receipt at Nova Poshta', f4_t:'Support', f4_s:'Ask us anything on Telegram @bbcbrand',
+  f1_t:'Ukraine & Europe', f1_s:'Nova Poshta in Ukraine and delivery across Europe', f2_t:'1–3 business days', f2_s:'We ship after prepayment and send you the tracking number',
+  f3_t:'Prepayment from ₴150', f3_s:'Ukraine — ₴150, Europe — from ₴390', f4_t:'Support', f4_s:'Ask us anything on Telegram @bbcbrand',
   tg_t:'Drops and new items — first in our channel', tg_s:'Announcements, timers and new BBC BRAND products', tg_btn:'Follow @bbcbrand',
   close:'Close', open3d:'Open 3D model', aria_3d:'3D model of the cardholder', drag:'Drag to rotate', rules:'Store rules',
   c_black:'Black', c_red:'Burgundy', c_white:'White', product:'Cardholder',
@@ -571,10 +583,13 @@ var I18N = {
       ['Versatile design','a minimal look and on-trend texture go with a business suit as well as everyday outfits.'],
       ['Packaging','cardholder, branded bag, sticker, business card and −15% off your next order.']],
   order:'Order', after_timer:'Opens when the timer ends', watch_tg:'Follow the drop on Telegram',
-  note:'Nova Poshta delivery · ₴150 prepayment, rest on receipt',
+  note:'Ukraine: Nova Poshta, ₴150 prepayment · Europe: prepayment from ₴390',
   form_lbl:'Checkout', form_title:'Delivery details',
   f_last:'Last name', f_first:'First name', f_phone:'Phone number', f_city:'City', f_np:'Nova Poshta branch / locker', f_np_ph:'Branch №',
   f_tg:'Telegram for contact (optional)', f_cm:'Comment (optional)',
+  f_dlv:'Delivery', d_ua:'Ukraine', d_eu:'Europe', f_country:'Country', f_zip:'Postcode', f_addr:'Address (street, building, flat)',
+  dn_ua:'Nova Poshta · 1–3 days · ₴150 prepayment, rest on receipt', dn_eu:'Nova Post across Europe · 5–10 days · prepayment from ₴390 — our manager confirms the exact amount for your country',
+  prepay_eu:'Prepayment from ₴390', prepay_hint_eu:'Send ₴390 using the details below. If shipping to your country costs more, our manager will tell you the exact amount and how to pay the rest.',
   agree_html:'I have read the <a href="#" data-r>store rules</a> and the payment, delivery and return terms',
   submit:'Place order', sending:'Sending…', back:'Back',
   err_fields:'Check the highlighted fields.', err_agree:'Please accept the store rules.', err_fail:'Could not place the order. Please try again.',
@@ -706,7 +721,16 @@ function renderProduct(){
   var o = $('#toOrder'); if(o) o.addEventListener('click', renderForm);
   tick();
 }
-var formData = null;
+var formData = null, dlv = 'ua';
+function setDlv(d){
+  dlv = d === 'eu' ? 'eu' : 'ua';
+  var f = $('#oForm'); if(!f) return;
+  f.setAttribute('data-d', dlv);
+  f.querySelectorAll('.seg button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.d === dlv)); });
+  $('#dlvNote').textContent = T(dlv === 'eu' ? 'dn_eu' : 'dn_ua');
+  $('#f_phone').placeholder = dlv === 'eu' ? '+48 / +49 / +33 …' : '+380 __ ___ __ __';
+  f.querySelectorAll('input').forEach(function(i){ i.classList.remove('err'); });
+}
 function renderForm(){
   var k = current, p = state.products[k];
   $('#pBody').innerHTML =
@@ -716,8 +740,12 @@ function renderForm(){
       '<div class="row"><div class="field"><label for="f_last">'+T('f_last')+'</label><input id="f_last" name="last_name" autocomplete="family-name" required maxlength="60"></div>'+
       '<div class="field"><label for="f_first">'+T('f_first')+'</label><input id="f_first" name="first_name" autocomplete="given-name" required maxlength="60"></div></div>'+
       '<div class="field"><label for="f_phone">'+T('f_phone')+'</label><input id="f_phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+380 __ ___ __ __" required maxlength="20"></div>'+
+      '<div class="field"><label>'+T('f_dlv')+'</label><div class="seg" role="group" aria-label="'+esc(T('f_dlv'))+'"><button type="button" data-d="ua">🇺🇦 '+T('d_ua')+'</button><button type="button" data-d="eu">🇪🇺 '+T('d_eu')+'</button></div><p class="dlv-note" id="dlvNote"></p></div>'+
+      '<div class="field eu-only"><label for="f_country">'+T('f_country')+'</label><input id="f_country" name="country" autocomplete="country-name" maxlength="60"></div>'+
       '<div class="row"><div class="field"><label for="f_city">'+T('f_city')+'</label><input id="f_city" name="city" autocomplete="address-level2" required maxlength="80"></div>'+
-      '<div class="field"><label for="f_np">'+T('f_np')+'</label><input id="f_np" name="np" inputmode="numeric" placeholder="'+esc(T('f_np_ph'))+'" required maxlength="60"></div></div>'+
+      '<div class="field ua-only"><label for="f_np">'+T('f_np')+'</label><input id="f_np" name="np" inputmode="numeric" placeholder="'+esc(T('f_np_ph'))+'" maxlength="60"></div>'+
+      '<div class="field eu-only"><label for="f_zip">'+T('f_zip')+'</label><input id="f_zip" name="zip" autocomplete="postal-code" maxlength="12"></div></div>'+
+      '<div class="field eu-only"><label for="f_addr">'+T('f_addr')+'</label><input id="f_addr" name="address" autocomplete="street-address" maxlength="160"></div>'+
       '<div class="field"><label for="f_tg">'+T('f_tg')+'</label><input id="f_tg" name="telegram" placeholder="@username" maxlength="40"></div>'+
       '<div class="field"><label for="f_cm">'+T('f_cm')+'</label><textarea id="f_cm" name="comment" rows="2" maxlength="300"></textarea></div>'+
       '<label class="check"><input type="checkbox" id="f_agree" required><span>'+T('agree_html')+'</span></label>'+
@@ -725,11 +753,13 @@ function renderForm(){
       '<div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-silver" type="submit" id="fsub" style="flex:1">'+T('submit')+'</button><button class="btn btn-ghost" type="button" id="fback">'+T('back')+'</button></div>'+
     '</form>';
   if(formData){ var f = $('#oForm'); Object.keys(formData).forEach(function(n){ if(f.elements[n]) f.elements[n].value = formData[n]; }); }
+  setDlv(dlv);
+  $('#oForm').querySelectorAll('.seg button').forEach(function(b){ b.addEventListener('click', function(){ setDlv(b.dataset.d); }); });
   $('#fback').addEventListener('click', function(){ formData = null; renderProduct(); });
   $('#oForm [data-r]').addEventListener('click', function(e){ e.preventDefault(); openModal('rModal'); });
-  $('#f_phone').addEventListener('blur', function(){ var d = this.value.replace(/\D/g,''); if(d.length===10 && d[0]==='0') this.value = '+38'+d; else if(d.length===12 && d.indexOf('380')===0) this.value = '+'+d; });
+  $('#f_phone').addEventListener('blur', function(){ if(dlv !== 'ua') return; var d = this.value.replace(/\D/g,''); if(d.length===10 && d[0]==='0') this.value = '+38'+d; else if(d.length===12 && d.indexOf('380')===0) this.value = '+'+d; });
   $('#oForm').addEventListener('submit', submitOrder);
-  $('#oForm').addEventListener('input', function(){ var f = $('#oForm'); formData = {}; ['last_name','first_name','phone','city','np','telegram','comment'].forEach(function(n){ formData[n] = f.elements[n].value; }); });
+  $('#oForm').addEventListener('input', function(){ var f = $('#oForm'); formData = {}; ['last_name','first_name','phone','country','city','np','zip','address','telegram','comment'].forEach(function(n){ formData[n] = f.elements[n].value; }); });
   $('#f_last').focus();
 }
 var lastOrder = null;
@@ -738,7 +768,7 @@ function renderDone(){
   $('#pBody').innerHTML =
     '<div class="ok-box"><div class="label">'+T('ok_lbl')+'</div><div class="num silver">№ '+esc(res.id)+'</div>'+
     '<p class="desc">'+T('product')+' · '+cname(res.color).toLowerCase()+' · '+esc(priceText(state.products[res.color]))+'</p></div>'+
-    '<div><div class="label" style="margin-bottom:8px">'+T('prepay')+'</div><p class="note" style="margin:0 0 10px">'+T('prepay_hint')+'</p><div class="pay">'+esc(res.payment || state.payment || '')+'</div></div>'+
+    '<div><div class="label" style="margin-bottom:8px">'+T(res.delivery==='eu'?'prepay_eu':'prepay')+'</div><p class="note" style="margin:0 0 10px">'+T(res.delivery==='eu'?'prepay_hint_eu':'prepay_hint')+'</p><div class="pay">'+esc(res.payment || state.payment || '')+'</div></div>'+
     '<p class="note">'+T('after_pay_html').replace('{tg}','<a href="https://t.me/'+esc(tgu)+'" target="_blank" rel="noopener">'+esc(tg)+'</a>')+'</p>'+
     (res.demo ? '<p class="note">'+T('demo_note')+'</p>' : '')+
     '<a class="btn btn-silver" href="https://t.me/'+esc(tgu)+'" target="_blank" rel="noopener">'+T('send_screen')+'</a>';
@@ -746,18 +776,19 @@ function renderDone(){
 function submitOrder(e){
   e.preventDefault();
   var f = e.target, err = $('#ferr'), bad = [];
-  var data = {color: current};
-  ['last_name','first_name','phone','city','np','telegram','comment'].forEach(function(n){ data[n] = (f.elements[n].value||'').trim(); });
+  var data = {color: current, delivery: dlv};
+  ['last_name','first_name','phone','country','city','np','zip','address','telegram','comment'].forEach(function(n){ data[n] = (f.elements[n].value||'').trim(); });
   f.querySelectorAll('input').forEach(function(i){ i.classList.remove('err'); });
-  ['last_name','first_name','city','np'].forEach(function(n){ if(data[n].length < 2 && !(n==='np' && data[n].length)) bad.push(n); });
+  var need = dlv === 'eu' ? ['last_name','first_name','country','city','zip','address'] : ['last_name','first_name','city','np'];
+  need.forEach(function(n){ if(data[n].length < 2 && !((n==='np' || n==='zip') && data[n].length)) bad.push(n); });
   var digits = data.phone.replace(/\D/g,'');
-  if(digits.length < 10 || digits.length > 13) bad.push('phone');
+  if(digits.length < (dlv === 'eu' ? 8 : 10) || digits.length > 15) bad.push('phone');
   bad.forEach(function(n){ f.elements[n].classList.add('err'); });
   if(bad.length){ err.textContent = T('err_fields'); f.elements[bad[0]].focus(); return; }
   if(!$('#f_agree').checked){ err.textContent = T('err_agree'); return; }
   err.textContent = '';
   var sb = $('#fsub'); sb.disabled = true; sb.textContent = T('sending');
-  var done = function(res){ res.color = current; lastOrder = res; formData = null; renderDone(); };
+  var done = function(res){ res.color = current; res.delivery = data.delivery; lastOrder = res; formData = null; renderDone(); };
   if(demo){ setTimeout(function(){ done({id:'BBC-DEMO', demo:true}); }, 500); return; }
   fetch(API + '/order', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)})
     .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })

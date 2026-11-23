@@ -1,4 +1,4 @@
-import { load, save, getKey, setKey, eff, publicState, json, CORS, priceTxt, COLORS, tg, adminIds, orderText, orderKeyboard, now } from "../../lib/common.js";
+import { load, save, getKey, setKey, eff, publicState, json, CORS, priceTxt, COLORS, tg, adminIds, orderText, orderKeyboard, now, newToken } from "../../lib/common.js";
 
 const clean = (s, n) => String(s ?? "").replace(/\s+/g, " ").trim().slice(0, n);
 
@@ -52,14 +52,14 @@ export async function onRequestPost({ request, env }) {
 
     st.seq = (st.seq || 0) + 1;
     o.id = `BBC-${String(st.seq).padStart(4, "0")}`;
-    o.status = "new"; o.created = now(); o.price = p.price ?? null; o.price_txt = priceTxt(p);
+    o.status = "new"; o.created = now(); o.token = newToken(); o.price = p.price ?? null; o.price_txt = priceTxt(p);
     st.orders = [...(st.orders || []), o].slice(-500);
     await save(env, st);
 
     await Promise.all(adminIds(env).map((id) =>
       tg(env, "sendMessage", { chat_id: id, text: "🔔 Новый заказ с сайта!\n\n" + orderText(o), parse_mode: "HTML", reply_markup: orderKeyboard(o) })
     ));
-    return json({ ok: true, id: o.id, delivery: o.delivery, prepay: o.prepay, payment: st.payment });
+    return json({ ok: true, id: o.id, token: o.token, delivery: o.delivery, prepay: o.prepay, payment: st.payment });
   } catch (e) {
     return json({ error: "Ошибка сервера. Попробуй ещё раз или напиши нам в Telegram." }, 500);
   }

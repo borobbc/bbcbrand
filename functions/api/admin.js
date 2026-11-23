@@ -27,6 +27,9 @@ export async function onRequestPost({ request, env }) {
       const o = (st.orders || []).find((x) => x.id === b.id);
       if (!o) return json({ error: "order not found" }, 404);
       if (b.status) o.status = b.status;
+      if (b.status === "paid") { o.pay = "ok"; o.paid_at = now(); }
+      if (b.status === "sent") { if (!o.pay || o.pay === "review") o.pay = "ok"; o.sent_at = now(); }
+      if (["ok", "bad", "review"].includes(b.pay)) { o.pay = b.pay; if (b.pay === "ok") { o.paid_at = now(); if (o.status === "new") o.status = "paid"; } }
       if (b.ttn) o.ttn = String(b.ttn).slice(0, 40);
       changed = true;
     } else if (b.action !== "get") {

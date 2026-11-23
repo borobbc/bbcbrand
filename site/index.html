@@ -125,6 +125,52 @@ footer{border-top:1px solid var(--line);padding:36px 0 50px;color:var(--muted);f
 .foot button,.foot a{background:none;border:0;color:var(--muted);text-decoration:none;padding:10px;min-height:44px}
 .foot button:hover,.foot a:hover{color:var(--text)}
 
+/* tracking */
+.trk{position:relative}
+.trk[hidden]{display:none!important}
+.trk .bd{position:absolute;top:8px;right:6px;width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 2px var(--bg)}
+.trk .bd[hidden]{display:none}
+.tsheet{width:min(560px,100%)}
+.tbody{padding:30px 26px 26px;display:flex;flex-direction:column;gap:16px}
+.tbody h3{margin:6px 0 0;font-size:26px;font-weight:800}
+.ocard{border:1px solid var(--line);border-radius:18px;background:var(--card);padding:18px;display:flex;flex-direction:column;gap:14px}
+.ocard .top{display:flex;align-items:center;gap:12px}
+.ocard .top img{width:56px;height:56px;border-radius:12px;object-fit:cover;flex:none}
+.ocard .top b{display:block;font-size:16px}
+.ocard .top .note{margin:2px 0 0}
+.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.tl li{position:relative;display:flex;gap:12px;padding:0 0 14px}
+.tl li:last-child{padding-bottom:0}
+.tl li:not(:last-child)::before{content:"";position:absolute;left:11px;top:24px;bottom:2px;width:2px;background:var(--line)}
+.tl li.done:not(:last-child)::before{background:var(--text);opacity:.5}
+.tl .ic{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;background:var(--bg2)}
+.tl .ic svg{width:13px;height:13px}
+.tl li.done .ic{background:var(--text);border-color:var(--text);color:var(--bg)}
+.tl li.cur .ic{border-color:var(--text)}
+.tl li.cur .ic::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--text);animation:pulse 1.4s ease-in-out infinite}
+.tl li.err .ic{border-color:var(--bad);color:var(--bad)}
+@keyframes pulse{50%{opacity:.25}}
+.tl .tx{display:flex;flex-direction:column;gap:2px;padding-top:1px}
+.tl .tx b{font-size:14px}
+.tl li:not(.done):not(.cur):not(.err) .tx b{color:var(--dim);font-weight:600}
+.tl li.err .tx b{color:var(--bad)}
+.tl .tx small{color:var(--muted);font-size:12.5px}
+.tl .tx a{color:var(--text);font-weight:700;font-size:13px}
+.cancelled{padding:12px 14px;border-radius:12px;border:1px solid rgba(239,107,107,.35);color:var(--bad);font-weight:700;font-size:14px}
+.upl{display:flex;flex-direction:column;gap:10px;padding:14px;border:1px dashed var(--onyx);border-radius:14px;background:var(--field)}
+.upl .pick{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;border-radius:12px;border:1px solid var(--line);font-weight:700;font-size:14px;cursor:pointer;background:var(--bg2)}
+.upl .pick:hover{border-color:var(--onyx)}
+.upl .pick svg{width:18px;height:18px}
+.upl [hidden]{display:none!important}
+.upl input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.upl .prev{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);word-break:break-all}
+.upl .prev img{width:54px;height:54px;border-radius:10px;object-fit:cover;flex:none;border:1px solid var(--line)}
+.upl .msg{font-size:13px;min-height:0}
+.upl .msg.bad{color:var(--bad)}
+.upl .msg.ok{color:var(--ok);font-weight:700}
+.upl .alt{font-size:12.5px;color:var(--muted);text-align:center}
+.upl .alt a{color:var(--text)}
+
 /* modal */
 .modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(6px)}
 .modal.open{display:flex;animation:fade .2s}
@@ -253,6 +299,7 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
     <nav class="nav-links" data-i18n-aria="aria_menu" aria-label="Меню">
       <a class="hide-m" href="#catalog" data-i18n="nav_catalog">Каталог</a>
       <a class="hide-m" href="#delivery" data-i18n="nav_delivery">Доставка</a>
+      <button class="tgl trk" type="button" id="trackBtn" hidden aria-label="Мои заказы"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg><span class="bd" id="trackDot" hidden></span></button>
       <button class="tgl" type="button" id="langBtn" aria-label="Switch to English">EN</button>
       <button class="tgl" type="button" id="themeBtn" aria-label="Светлая тема">
         <svg id="themeIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
@@ -366,6 +413,17 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
 </div>
 
 <!-- rules modal -->
+<div class="modal" id="tModal" role="dialog" aria-modal="true" aria-labelledby="tTitle">
+  <div class="sheet tsheet">
+    <button class="x" type="button" data-close data-i18n-aria="close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="tbody">
+      <div><div class="label" data-i18n="trk_lbl">Отслеживание</div><h3 id="tTitle" data-i18n="trk_title">Мои заказы</h3></div>
+      <div id="tList" style="display:flex;flex-direction:column;gap:14px"></div>
+      <button class="btn btn-ghost" type="button" id="tRefresh" data-i18n="trk_refresh">Обновить статус</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="rModal" role="dialog" aria-modal="true" data-i18n-aria="rules" aria-label="Правила магазина">
   <div class="sheet" style="width:min(860px,100%)">
     <button class="x" type="button" data-close data-i18n-aria="close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
@@ -552,12 +610,18 @@ var I18N = {
   f_tg:'Telegram для связи (необязательно)', f_cm:'Комментарий (необязательно)',
   f_dlv:'Доставка', d_ua:'Украина', d_eu:'Европа', f_country:'Страна', f_zip:'Индекс', f_addr:'Адрес (улица, дом, квартира)',
   dn_ua:'Новая Почта · 1–3 дня · предоплата ₴150, остаток при получении', dn_eu:'Nova Post по Европе · 5–10 дней · предоплата от ₴390 — точную сумму для твоей страны подтвердит менеджер',
+  trk_btn:'Мои заказы', trk_lbl:'Отслеживание', trk_title:'Мои заказы', trk_refresh:'Обновить статус', trk_loading:'Загружаем статус…', trk_err:'Не получилось загрузить статус. Попробуй ещё раз.',
+  st_created:'Заказ принят', st_wait:'Ожидаем предоплату', st_wait_s:'Переведи предоплату и прикрепи скрин ниже', st_review:'Скрин на проверке', st_review_s:'Проверяем оплату — обычно это быстро', st_ok:'Оплата подтверждена', st_bad:'Оплата отклонена', st_bad_s:'Проверь сумму и реквизиты и отправь скрин ещё раз или напиши @bbcbrand',
+  st_pack:'Готовим к отправке', st_pack_s:'Упакуем и отправим в течение 1–3 рабочих дней', st_sent:'Отправлен', st_sent_s:'ТТН', track_np:'Отследить посылку', st_cancel:'Заказ отменён', st_missing:'Заказ не найден',
+  up_lbl:'Скрин оплаты', up_pick:'Прикрепить скрин оплаты', up_change:'Выбрать другой файл', up_send:'Отправить скрин', up_sending:'Отправляем…', up_ok:'Скрин получен ✓ Проверим оплату и обновим статус', up_big:'Файл больше 10 МБ', up_type:'Нужен скрин (фото) или PDF', up_err:'Не получилось отправить. Попробуй ещё раз.', up_tg:'Не получается? Отправь в Telegram',
+  done_track:'Статус заказа всегда можно посмотреть по кнопке с грузовиком вверху сайта.',
   prepay_eu:'Предоплата от ₴390', prepay_hint_eu:'Переведи ₴390 по реквизитам ниже. Если доставка в твою страну дороже, менеджер напишет точную сумму и как оплатить остаток.',
   agree_html:'Я ознакомлен(а) с <a href="#" data-r>правилами магазина</a>, условиями оплаты, доставки и возврата',
   submit:'Оформить заказ', sending:'Отправляем…', back:'Назад',
   err_fields:'Проверь выделенные поля.', err_agree:'Нужно согласиться с правилами магазина.', err_fail:'Не получилось оформить заказ. Попробуй ещё раз.',
   err_net:'Нет связи с сервером. Попробуй ещё раз или напиши нам в Telegram.',
   ok_lbl:'Заказ принят', prepay:'Предоплата ₴150', prepay_hint:'Переведи ₴150 по реквизитам ниже — остаток оплатишь при получении на Новой Почте.',
+  after_pay_up:'После оплаты прикрепи скрин прямо здесь — он сразу придёт нам. Мы отправим посылку и пришлём ТТН.',
   after_pay_html:'После оплаты отправь скрин и номер заказа в Telegram {tg}. Мы отправим посылку и пришлём ТТН.',
   demo_note:'Это демо-режим: сайт не подключён к боту, заказ никуда не отправлен.', send_screen:'Отправить скрин оплаты',
   demo_toast:'Демо-режим: подключи сайт к боту, чтобы наличие и заказы работали вживую',
@@ -589,12 +653,18 @@ var I18N = {
   f_tg:'Telegram for contact (optional)', f_cm:'Comment (optional)',
   f_dlv:'Delivery', d_ua:'Ukraine', d_eu:'Europe', f_country:'Country', f_zip:'Postcode', f_addr:'Address (street, building, flat)',
   dn_ua:'Nova Poshta · 1–3 days · ₴150 prepayment, rest on receipt', dn_eu:'Nova Post across Europe · 5–10 days · prepayment from ₴390 — our manager confirms the exact amount for your country',
+  trk_btn:'My orders', trk_lbl:'Tracking', trk_title:'My orders', trk_refresh:'Refresh status', trk_loading:'Loading status…', trk_err:'Could not load the status. Please try again.',
+  st_created:'Order placed', st_wait:'Waiting for prepayment', st_wait_s:'Send the prepayment and attach the screenshot below', st_review:'Screenshot under review', st_review_s:'We are checking your payment — usually quick', st_ok:'Payment confirmed', st_bad:'Payment declined', st_bad_s:'Check the amount and details and send the screenshot again, or message @bbcbrand',
+  st_pack:'Preparing to ship', st_pack_s:'We pack and ship within 1–3 business days', st_sent:'Shipped', st_sent_s:'Tracking number', track_np:'Track parcel', st_cancel:'Order cancelled', st_missing:'Order not found',
+  up_lbl:'Payment screenshot', up_pick:'Attach payment screenshot', up_change:'Choose another file', up_send:'Send screenshot', up_sending:'Sending…', up_ok:'Screenshot received ✓ We will check the payment and update the status', up_big:'File is larger than 10 MB', up_type:'Please attach a screenshot (image) or PDF', up_err:'Could not send. Please try again.', up_tg:'Not working? Send it on Telegram',
+  done_track:'You can always check your order status with the truck button at the top of the site.',
   prepay_eu:'Prepayment from ₴390', prepay_hint_eu:'Send ₴390 using the details below. If shipping to your country costs more, our manager will tell you the exact amount and how to pay the rest.',
   agree_html:'I have read the <a href="#" data-r>store rules</a> and the payment, delivery and return terms',
   submit:'Place order', sending:'Sending…', back:'Back',
   err_fields:'Check the highlighted fields.', err_agree:'Please accept the store rules.', err_fail:'Could not place the order. Please try again.',
   err_net:'No connection to the server. Try again or message us on Telegram.',
   ok_lbl:'Order placed', prepay:'₴150 prepayment', prepay_hint:'Send ₴150 using the details below — pay the rest on receipt at Nova Poshta.',
+  after_pay_up:'After paying, attach the screenshot right here — it comes straight to us. We will ship your parcel and send the tracking number.',
   after_pay_html:'After paying, send a screenshot and your order number to Telegram {tg}. We will ship your parcel and send the tracking number.',
   demo_note:'Demo mode: the site is not connected to the bot, so this order was not sent anywhere.', send_screen:'Send payment screenshot',
   demo_toast:'Demo mode: connect the site to the bot to make stock and orders live',
@@ -769,9 +839,10 @@ function renderDone(){
     '<div class="ok-box"><div class="label">'+T('ok_lbl')+'</div><div class="num silver">№ '+esc(res.id)+'</div>'+
     '<p class="desc">'+T('product')+' · '+cname(res.color).toLowerCase()+' · '+esc(priceText(state.products[res.color]))+'</p></div>'+
     '<div><div class="label" style="margin-bottom:8px">'+T(res.delivery==='eu'?'prepay_eu':'prepay')+'</div><p class="note" style="margin:0 0 10px">'+T(res.delivery==='eu'?'prepay_hint_eu':'prepay_hint')+'</p><div class="pay">'+esc(res.payment || state.payment || '')+'</div></div>'+
-    '<p class="note">'+T('after_pay_html').replace('{tg}','<a href="https://t.me/'+esc(tgu)+'" target="_blank" rel="noopener">'+esc(tg)+'</a>')+'</p>'+
+    '<p class="note">'+T(res.token ? 'after_pay_up' : 'after_pay_html').replace('{tg}','<a href="https://t.me/'+esc(tgu)+'" target="_blank" rel="noopener">'+esc(tg)+'</a>')+'</p>'+
     (res.demo ? '<p class="note">'+T('demo_note')+'</p>' : '')+
-    '<a class="btn btn-silver" href="https://t.me/'+esc(tgu)+'" target="_blank" rel="noopener">'+T('send_screen')+'</a>';
+    (res.token ? uploadHTML() + '<p class="note">'+T('done_track')+'</p>' : '<a class="btn btn-silver" href="https://t.me/'+esc(tgu)+'" target="_blank" rel="noopener">'+T('send_screen')+'</a>');
+  if(res.token) bindUpload($('#pBody .upl'), {id:res.id, t:res.token}, function(){ refreshTrack(true); });
 }
 function submitOrder(e){
   e.preventDefault();
@@ -788,7 +859,7 @@ function submitOrder(e){
   if(!$('#f_agree').checked){ err.textContent = T('err_agree'); return; }
   err.textContent = '';
   var sb = $('#fsub'); sb.disabled = true; sb.textContent = T('sending');
-  var done = function(res){ res.color = current; res.delivery = data.delivery; lastOrder = res; formData = null; renderDone(); };
+  var done = function(res){ res.color = current; res.delivery = data.delivery; lastOrder = res; if(res.token) addOrder(res); formData = null; renderDone(); };
   if(demo){ setTimeout(function(){ done({id:'BBC-DEMO', demo:true}); }, 500); return; }
   fetch(API + '/order', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)})
     .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
@@ -798,6 +869,92 @@ function submitOrder(e){
     })
     .catch(function(){ err.textContent = T('err_net'); sb.disabled=false; sb.textContent=T('submit'); });
 }
+
+/* my orders + tracking */
+var ORD_KEY = 'bbc_orders', SEEN_KEY = 'bbc_orders_seen', trackCache = {};
+function getOrders(){ try{ var a = JSON.parse(localStorage.getItem(ORD_KEY) || '[]'); return Array.isArray(a) ? a.filter(function(o){ return o && o.id && o.t; }) : []; }catch(e){ return []; } }
+function addOrder(res){ var a = getOrders().filter(function(o){ return o.id !== res.id; }); a.unshift({id:res.id, t:res.token}); store(ORD_KEY, JSON.stringify(a.slice(0,10))); updateTrackBtn(); }
+function sigOf(o){ return [o.status, o.pay || '', o.ttn || ''].join('|'); }
+function updateTrackBtn(){
+  var has = getOrders().length > 0, b = $('#trackBtn'); b.hidden = !has; b.setAttribute('aria-label', T('trk_btn')); b.title = T('trk_btn');
+  if(!has) return;
+  var seen = {}; try{ seen = JSON.parse(localStorage.getItem(SEEN_KEY) || '{}'); }catch(e){}
+  var changed = Object.keys(trackCache).some(function(id){ return trackCache[id] && !trackCache[id].missing && seen[id] !== sigOf(trackCache[id]); });
+  $('#trackDot').hidden = !changed;
+}
+function markSeen(){ var seen = {}; Object.keys(trackCache).forEach(function(id){ if(trackCache[id] && !trackCache[id].missing) seen[id] = sigOf(trackCache[id]); }); store(SEEN_KEY, JSON.stringify(seen)); $('#trackDot').hidden = true; }
+function refreshTrack(render){
+  var a = getOrders(); if(!a.length || demo) return Promise.resolve();
+  return fetch(API + '/track?id=' + encodeURIComponent(a.map(function(o){ return o.id; }).join(',')) + '&t=' + encodeURIComponent(a.map(function(o){ return o.t; }).join(',')), {cache:'no-store'})
+    .then(function(r){ return r.json(); })
+    .then(function(j){ if(!j.ok) throw 0; j.orders.forEach(function(o){ trackCache[o.id] = o; }); if(render || $('#tModal').classList.contains('open')) renderTrack(); updateTrackBtn(); })
+    .catch(function(){ if(render) $('#tList').innerHTML = '<p class="note">'+T('trk_err')+'</p>'; });
+}
+var IC_OK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+var IC_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M7 7l10 10M17 7 7 17"/></svg>';
+function fmtD(ms){ try{ return new Date(ms).toLocaleString(lang==='en'?'en-GB':'ru-RU', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit', timeZone:'Europe/Kyiv'}); }catch(e){ return ''; } }
+function step(cls, title, sub){ return '<li class="'+cls+'"><span class="ic">'+(cls==='done'?IC_OK:cls==='err'?IC_X:'')+'</span><span class="tx"><b>'+title+'</b>'+(sub?'<small>'+sub+'</small>':'')+'</span></li>'; }
+function renderTrack(){
+  var a = getOrders(), box = $('#tList');
+  box.innerHTML = a.map(function(x){
+    var o = trackCache[x.id];
+    if(!o) return '<div class="ocard"><p class="note" style="margin:0">'+T('trk_loading')+'</p></div>';
+    if(o.missing) return '<div class="ocard"><b>№ '+esc(x.id)+'</b><p class="note" style="margin:0">'+T('st_missing')+'</p></div>';
+    var sent = o.status === 'sent', pay = o.pay, ok = pay === 'ok' || sent;
+    var h = '<div class="ocard" data-id="'+esc(o.id)+'"><div class="top"><img src="img/'+esc(o.color)+'-sm.jpg" alt=""><div><b>№ '+esc(o.id)+'</b><p class="note">'+T('product')+' · '+cname(o.color).toLowerCase()+' · '+esc(o.price_txt||'')+' · '+(o.delivery==='eu'?'🇪🇺':'🇺🇦')+'</p></div></div>';
+    if(o.status === 'cancel') return h + '<div class="cancelled">'+T('st_cancel')+'</div></div>';
+    h += '<ol class="tl">' + step('done', T('st_created'), fmtD(o.created));
+    if(ok) h += step('done', T('st_ok'), o.paid_at ? fmtD(o.paid_at) : '');
+    else if(pay === 'bad') h += step('err', T('st_bad'), T('st_bad_s'));
+    else if(pay === 'review') h += step('cur', T('st_review'), T('st_review_s'));
+    else h += step('cur', T('st_wait'), T('st_wait_s'));
+    h += step(sent ? 'done' : ok ? 'cur' : '', T('st_pack'), ok && !sent ? T('st_pack_s') : '');
+    h += step(sent ? 'done' : '', T('st_sent'), sent && o.ttn ? T('st_sent_s')+': '+esc(o.ttn)+' · <a href="https://novaposhta.ua/tracking/?cargo_number='+encodeURIComponent(o.ttn)+'" target="_blank" rel="noopener">'+T('track_np')+' →</a>' : '');
+    h += '</ol>';
+    if(o.status === 'new' && (pay == null || pay === 'bad')) h += uploadHTML();
+    return h + '</div>';
+  }).join('');
+  box.querySelectorAll('.ocard .upl').forEach(function(u){
+    var id = u.closest('.ocard').dataset.id, ord = getOrders().filter(function(x){ return x.id === id; })[0];
+    if(ord) bindUpload(u, ord, function(o){ if(o) trackCache[o.id] = o; setTimeout(renderTrack, 1600); });
+  });
+}
+function uploadHTML(){
+  var tg = (state && state.contact) || '@bbcbrand';
+  return '<div class="upl"><div class="label">'+T('up_lbl')+'</div>'+
+    '<label class="pick"><input type="file" accept="image/*,application/pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.5 12.6 21a5.5 5.5 0 0 1-7.8-7.8l9-9a3.7 3.7 0 0 1 5.2 5.2l-9 9a1.8 1.8 0 0 1-2.6-2.6l8.3-8.3"/></svg><span class="pt">'+T('up_pick')+'</span></label>'+
+    '<div class="prev" hidden></div><button class="btn btn-silver send" type="button" hidden>'+T('up_send')+'</button>'+
+    '<div class="msg" role="status"></div>'+
+    '<div class="alt"><a href="https://t.me/'+esc(tg.replace('@',''))+'" target="_blank" rel="noopener">'+T('up_tg')+'</a></div></div>';
+}
+function bindUpload(box, ord, onDone){
+  if(!box) return;
+  var inp = box.querySelector('input'), prev = box.querySelector('.prev'), send = box.querySelector('.send'), msg = box.querySelector('.msg'), pt = box.querySelector('.pt'), file = null;
+  inp.addEventListener('change', function(){
+    file = inp.files && inp.files[0]; msg.className = 'msg'; msg.textContent = '';
+    if(!file){ prev.hidden = true; send.hidden = true; return; }
+    if(file.size > 10*1024*1024){ msg.className = 'msg bad'; msg.textContent = T('up_big'); file = null; return; }
+    if(!/^image\//.test(file.type) && file.type !== 'application/pdf'){ msg.className = 'msg bad'; msg.textContent = T('up_type'); file = null; return; }
+    prev.innerHTML = (/^image\//.test(file.type) ? '<img alt="" src="'+URL.createObjectURL(file)+'">' : '') + '<span>'+esc(file.name)+'</span>';
+    prev.hidden = false; send.hidden = false; pt.textContent = T('up_change');
+  });
+  send.addEventListener('click', function(){
+    if(!file) return;
+    send.disabled = true; send.textContent = T('up_sending'); msg.className = 'msg'; msg.textContent = '';
+    var fd = new FormData(); fd.append('id', ord.id); fd.append('t', ord.t); fd.append('file', file, file.name || 'receipt');
+    fetch(API + '/receipt', {method:'POST', body:fd})
+      .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+      .then(function(x){
+        if(!x.ok){ throw new Error(x.j.error || ''); }
+        msg.className = 'msg ok'; msg.textContent = T('up_ok'); send.hidden = true; box.querySelector('.pick').style.display = 'none';
+        if(x.j.order) trackCache[x.j.order.id] = x.j.order;
+        if(onDone) onDone(x.j.order);
+      })
+      .catch(function(e){ msg.className = 'msg bad'; msg.textContent = (e && e.message) || T('up_err'); send.disabled = false; send.textContent = T('up_send'); });
+  });
+}
+$('#trackBtn').addEventListener('click', function(){ renderTrack(); openModal('tModal'); refreshTrack(true).then(markSeen); });
+$('#tRefresh').addEventListener('click', function(){ refreshTrack(true).then(markSeen); });
 
 /* ticking */
 var lastEff = '';
@@ -832,6 +989,7 @@ function applyLang(){
     if(v==='product') renderProduct(); else if(v==='form') renderForm(); else if(v==='done') renderDone();
     if($('#m3d').classList.contains('open')) set3dColor(cur3d);
   }
+  updateTrackBtn(); if($('#tModal').classList.contains('open')) renderTrack();
 }
 $('#langBtn').addEventListener('click', function(){ lang = lang==='ru' ? 'en' : 'ru'; store('bbc_lang', lang); applyLang(); });
 
@@ -895,7 +1053,7 @@ $('#open3d').addEventListener('click', function(){ set3dColor(current); rx = -14
 /* boot */
 $('#yr').textContent = new Date().getFullYear();
 applyLang(); applyTheme();
-load().then(function(){ renderGrid(); tick(); if(demo) toast(T('demo_toast')); });
+load().then(function(){ renderGrid(); tick(); if(demo) toast(T('demo_toast')); updateTrackBtn(); refreshTrack(false); });
 var tt;
 function toast(t){ var el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(tt); tt = setTimeout(function(){ el.classList.remove('show'); }, 4200); }
 })();

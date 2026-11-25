@@ -55,6 +55,7 @@ header{position:sticky;top:0;z-index:20;background:var(--hdr);backdrop-filter:bl
 .eyebrow i{width:28px;height:1px;background:var(--onyx)}
 .hero h1{margin:18px 0 18px;font-size:clamp(44px,7vw,92px);line-height:.98;font-weight:800;letter-spacing:.02em;text-wrap:balance}
 .hero p.lead{margin:0 0 30px;color:var(--muted);font-size:17px;max-width:520px;text-wrap:pretty}
+.hero h1+.cta{margin-top:28px}
 .cta{display:flex;flex-wrap:wrap;gap:12px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:14px;border:1px solid transparent;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:transform .15s,background .2s,border-color .2s}
 .btn:active{transform:scale(.98)}
@@ -318,7 +319,6 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
       <div>
         <span class="eyebrow"><i></i><span data-i18n="hero_eyebrow">магазин</span><i></i></span>
         <h1><span class="silver">BBC</span><br>BRAND</h1>
-        <p class="lead" data-i18n="hero_lead">Сейчас в продаже — картхолдеры BIG BUCKS CLUB из эко-кожи с фактурой «под крокодила» и УФ-печатью, в трёх цветах. Доставка по Украине и всей Европе.</p>
         <div class="cta">
           <a class="btn btn-silver" href="#catalog" data-i18n="hero_cta">Смотреть каталог</a>
           <a class="btn btn-ghost" href="https://t.me/bbcbrand" target="_blank" rel="noopener">Telegram</a>

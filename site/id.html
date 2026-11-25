@@ -161,12 +161,12 @@ var I18N = {
       bad_t:'Метка не найдена', bad_s:'Такого кода нет в базе BBC BRAND. Возможно, это подделка — напиши нам в Telegram @bbcbrand.',
       err_t:'Нет связи', err_s:'Не удалось проверить метку. Проверь интернет и отсканируй ещё раз.',
       drag:'Покрути модель', code:'Код паспорта', color:'Цвет', first:'Первая проверка', scans:'Проверок', shop:'Перейти в магазин',
-      product:'Картхолдер BBC BRAND', now:'сейчас', black:'Чёрный', red:'Бордовый', white:'Белый', title:'Проверка подлинности — BBC BRAND'},
+      product:'Картхолдер BIG BUCKS CLUB', now:'сейчас', black:'Чёрный', red:'Бордовый', white:'Белый', title:'Проверка подлинности — BBC BRAND'},
   en:{checking:'Checking…', ok_t:'Authentic', ok_s:'This cardholder has passed the authenticity check. Its NFC tag is registered in the BBC BRAND database.',
       bad_t:'Tag not found', bad_s:'This code is not in the BBC BRAND database. It may be a fake — message us on Telegram @bbcbrand.',
       err_t:'No connection', err_s:'Could not verify the tag. Check your connection and scan again.',
       drag:'Spin the model', code:'Passport code', color:'Colour', first:'First check', scans:'Checks', shop:'Go to the store',
-      product:'BBC BRAND Cardholder', now:'just now', black:'Black', red:'Burgundy', white:'White', title:'Authenticity check — BBC BRAND'}
+      product:'BIG BUCKS CLUB Cardholder', now:'just now', black:'Black', red:'Burgundy', white:'White', title:'Authenticity check — BBC BRAND'}
 };
 var SW = {black:'#141414', red:'#8e0b0b', white:'#f3f1ee'};
 var EDGE = {black:['#1b1b1c','#0d0d0e'], red:['#7a0606','#4d0303'], white:['#e9e6e2','#cfcac4']};
@@ -209,8 +209,8 @@ function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&
 /* 3D */
 var obj = $('#obj'), rx = -12, ry = -30, vx = 0, vy = 0.45, dragging = false, lastX = 0, lastY = 0, idle = 100;
 function setColor(k){
-  $('#tFront').src = '/img/' + k + '-front.jpg';
-  $('#tBack').src = '/img/' + k + '-back.jpg';
+  $('#tFront').src = '/img/' + k + '-front.jpg?v=2';
+  $('#tBack').src = '/img/' + k + '-back.jpg?v=2';
   document.querySelectorAll('#obj .edge').forEach(function(e){ e.style.background = 'linear-gradient(90deg,'+EDGE[k][1]+','+EDGE[k][0]+','+EDGE[k][1]+')'; });
 }
 function frame(){

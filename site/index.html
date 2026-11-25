@@ -100,6 +100,38 @@ section{padding:84px 0}
 @keyframes pulse{50%{box-shadow:0 0 0 6px rgba(231,196,106,.12)}}
 .tnum{font-variant-numeric:tabular-nums}
 
+
+/* nfc passport */
+.nfc{display:grid;grid-template-columns:1.05fr 1fr;gap:32px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:clamp(20px,3.2vw,40px)}
+.nfc h2{margin:10px 0 12px;font-size:clamp(28px,3.6vw,42px);font-weight:800;letter-spacing:.02em;line-height:1.05}
+.nfc>div>p{margin:0 0 20px;color:var(--muted);max-width:470px}
+.nfc ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.nfc li{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.45}
+.nfc li b{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid var(--onyx);display:grid;place-items:center;font-size:12px;font-weight:800}
+@media (max-width:820px){.nfc{grid-template-columns:1fr}}
+.nd{position:relative;aspect-ratio:16/11;border-radius:16px;background:radial-gradient(120% 90% at 35% 45%,var(--card),var(--bg));border:1px solid var(--line);overflow:hidden;container-type:inline-size}
+.nd .h{position:absolute;left:7%;top:24%;width:60%;border-radius:3.5%/5.2%;box-shadow:0 18px 40px rgba(0,0,0,.45);display:block}
+.nd .tag{position:absolute;left:37%;top:52%;z-index:3}
+.nd .tag i{position:absolute;left:-7cqw;top:-7cqw;width:14cqw;height:14cqw;border-radius:50%;border:2px solid rgba(255,255,255,.8);opacity:0;animation:ndRing 6s infinite}
+.nd .tag i:nth-child(2){animation-delay:.3s}
+.nd .ph{position:absolute;top:8%;left:66%;width:27%;aspect-ratio:9/18.5;border-radius:16%/8%;background:#0b0b0c;border:2px solid #3a3c3f;box-shadow:0 24px 50px rgba(0,0,0,.55);animation:ndPh 6s infinite;z-index:2}
+.nd .scr{position:absolute;inset:5%;border-radius:12%/6%;background:#141516;overflow:hidden}
+.nd .idle,.nd .ok{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5%;padding:8%;text-align:center}
+.nd .idle{color:#8d8f93;font-size:2.1cqw;line-height:1.3;animation:ndIdle 6s infinite}
+.nd .idle svg{width:38%;stroke:#8d8f93}
+.nd .ok{opacity:0;animation:ndOk 6s infinite;color:#f2f2f3}
+.nd .ok .ck{width:32%;aspect-ratio:1;border-radius:50%;background:rgba(111,211,139,.14);display:grid;place-items:center}
+.nd .ok .ck svg{width:58%;stroke:#6fd38b}
+.nd .ok b{font-size:2.4cqw;font-weight:800;letter-spacing:.06em}
+.nd .ok img{width:82%;border-radius:3px}
+.nd .ok small{font-size:1.9cqw;color:#9a9ca0;font-variant-numeric:tabular-nums}
+@keyframes ndPh{0%,14%{left:66%;top:8%;transform:rotate(7deg)}34%,80%{left:23.5%;top:21%;transform:rotate(0)}96%,100%{left:66%;top:8%;transform:rotate(7deg)}}
+@keyframes ndRing{0%,33%{opacity:0;transform:scale(.4)}37%{opacity:.9}55%{opacity:0;transform:scale(1.7)}100%{opacity:0}}
+@keyframes ndOk{0%,38%{opacity:0;transform:translateY(6%)}44%,84%{opacity:1;transform:none}90%,100%{opacity:0}}
+@keyframes ndIdle{0%,35%{opacity:1}40%,86%{opacity:0}92%,100%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.nd .ph{animation:none;left:23.5%;top:21%}.nd .ok{animation:none;opacity:1}.nd .idle{animation:none;opacity:0}.nd .tag i{animation:none}}
+.pnfc{display:grid;gap:10px}
+.pnfc .nd{aspect-ratio:16/10}
 /* features */
 .feat{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
 .feat div{background:var(--bg2);padding:26px 22px}
@@ -183,6 +215,7 @@ footer{border-top:1px solid var(--line);padding:36px 0 50px;color:var(--muted);f
 .pm{display:grid;grid-template-columns:1fr 1fr}
 .pm .media{position:relative;background:#efeeeb;min-height:420px}
 .pm .media img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}
+@media (min-width:821px){.pm .media{position:sticky;top:0;align-self:start;aspect-ratio:4/5;min-height:0}}
 .chip3d{position:absolute;right:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:0;background:#0b0b0c;color:#fff;font-weight:800;letter-spacing:.12em;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
 .chip3d svg{width:18px;height:18px}
 .chip3d:hover{background:#1b1c1e}
@@ -299,6 +332,7 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
     </a>
     <nav class="nav-links" data-i18n-aria="aria_menu" aria-label="Меню">
       <a class="hide-m" href="#catalog" data-i18n="nav_catalog">Каталог</a>
+      <a class="hide-m" href="#nfc" data-i18n="nav_nfc">Проверка</a>
       <a class="hide-m" href="#delivery" data-i18n="nav_delivery">Доставка</a>
       <button class="tgl trk" type="button" id="trackBtn" hidden aria-label="Мои заказы"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg><span class="bd" id="trackDot" hidden></span></button>
       <button class="tgl" type="button" id="langBtn" aria-label="Switch to English">EN</button>
@@ -341,6 +375,24 @@ html[lang="ru"] [data-lang="ru"],html[lang="en"] [data-lang="en"]{display:block}
         <p data-i18n="cat_sub">Нажми на картхолдер, чтобы посмотреть его ближе, покрутить в 3D и оформить заказ.</p>
       </div>
       <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section id="nfc" style="padding-top:0">
+    <div class="wrap">
+      <div class="nfc">
+        <div>
+          <span class="eyebrow"><i></i><span data-i18n="nfc_eyebrow">NFC-паспорт</span></span>
+          <h2 data-i18n="nfc_title">Проверка на оригинал</h2>
+          <p data-i18n="nfc_sub">В середине каждого картхолдера вшита NFC-метка с уникальным кодом. Приложи телефон — и сразу увидишь, что это оригинал BBC BRAND.</p>
+          <ol>
+            <li><b>1</b><span data-i18n="nfc_s1">Приложи телефон к центру холдера</span></li>
+            <li><b>2</b><span data-i18n="nfc_s2">Откроется страница проверки на нашем сайте</span></li>
+            <li><b>3</b><span data-i18n="nfc_s3">Увидишь «Оригинал», 3D-модель своего цвета и номер экземпляра</span></li>
+          </ol>
+        </div>
+        <div id="nfcBox"></div>
+      </div>
     </div>
   </section>
 
@@ -585,7 +637,13 @@ var EDGE = {black:['#1b1b1c','#0d0d0e'], red:['#7a0606','#4d0303'], white:['#e9e
 
 var I18N = {
  ru:{
-  title:'BBC BRAND — магазин', aria_home:'BBC BRAND — на главную', aria_menu:'Меню', nav_catalog:'Каталог', nav_delivery:'Доставка',
+  title:'BBC BRAND — магазин', aria_home:'BBC BRAND — на главную', aria_menu:'Меню', nav_catalog:'Каталог', nav_delivery:'Доставка', nav_nfc:'Проверка',
+  nfc_eyebrow:'NFC-паспорт', nfc_title:'Проверка на оригинал',
+  nfc_sub:'В середине каждого картхолдера вшита NFC-метка с уникальным кодом. Приложи телефон — и сразу увидишь, что это оригинал BBC BRAND.',
+  nfc_s1:'Приложи телефон к центру холдера (iPhone и Android с NFC)', nfc_s2:'Откроется страница проверки на нашем сайте',
+  nfc_s3:'Увидишь «Оригинал», 3D-модель своего цвета и номер экземпляра — например, № 004 / 300',
+  nfc_idle:'Поднеси к холдеру', nfc_ok:'ОРИГИНАЛ',
+  nfc_modal:'Внутри — NFC-метка. Приложи телефон к центру холдера, и откроется страница проверки на оригинал с номером твоего экземпляра.',
   hero_eyebrow:'магазин', hero_lead:'Сейчас в продаже — картхолдеры BIG BUCKS CLUB из эко-кожи с фактурой «под крокодила» и УФ-печатью, в трёх цветах. Доставка по Украине и всей Европе.',
   hero_cta:'Смотреть каталог', drop_label:'Дроп · картхолдер · через',
   cat_eyebrow:'каталог', cat_title:'Выбери свой цвет', cat_sub:'Нажми на картхолдер, чтобы посмотреть его ближе, покрутить в 3D и оформить заказ.',
@@ -602,6 +660,7 @@ var I18N = {
       ['Практичность','3 отделения для банковских карт, визиток или пропусков.'],
       ['Материал','качественная эко-кожа.'],
       ['Универсальный дизайн','лаконичный стиль и трендовая фактура подойдут как к деловому костюму, так и к повседневному образу.'],
+      ['NFC-паспорт','метка в центре холдера — приложи телефон, и откроется проверка на оригинал с номером экземпляра.'],
       ['Упаковка','картхолдер, брендированный пакет, наклейка, визитка, скидка −15% на следующий заказ.']],
   order:'Заказать', after_timer:'Откроется после таймера', watch_tg:'Следить за дропом в Telegram',
   note:'Украина: Новая Почта, предоплата ₴150 · Европа: предоплата от ₴390',
@@ -628,7 +687,13 @@ var I18N = {
   theme_to_light:'Светлая тема', theme_to_dark:'Тёмная тема', lang_to:'Switch to English', lang_btn:'EN'
  },
  en:{
-  title:'BBC BRAND — store', aria_home:'BBC BRAND — home', aria_menu:'Menu', nav_catalog:'Catalog', nav_delivery:'Delivery',
+  title:'BBC BRAND — store', aria_home:'BBC BRAND — home', aria_menu:'Menu', nav_catalog:'Catalog', nav_delivery:'Delivery', nav_nfc:'Authenticity',
+  nfc_eyebrow:'NFC passport', nfc_title:'Authenticity check',
+  nfc_sub:'Every cardholder has an NFC tag with a unique code sewn into its centre. Tap your phone and instantly see it is an original BBC BRAND piece.',
+  nfc_s1:'Hold your phone to the centre of the cardholder (iPhone and Android with NFC)', nfc_s2:'Our verification page opens',
+  nfc_s3:'You see “Original”, a 3D model in your colour and the piece number — e.g. No. 004 / 300',
+  nfc_idle:'Tap the cardholder', nfc_ok:'ORIGINAL',
+  nfc_modal:'There is an NFC tag inside. Hold your phone to the centre and the authenticity page opens with your piece number.',
   hero_eyebrow:'store', hero_lead:'Now available: BIG BUCKS CLUB eco-leather cardholders with a croc-embossed texture and UV print, in three colours. Delivery across Ukraine and all of Europe.',
   hero_cta:'View catalog', drop_label:'Drop · cardholder · in',
   cat_eyebrow:'catalog', cat_title:'Pick your colour', cat_sub:'Tap a cardholder to see it up close, spin it in 3D and place an order.',
@@ -645,6 +710,7 @@ var I18N = {
       ['Practical','3 slots for bank cards, business cards or passes.'],
       ['Material','high-quality eco-leather.'],
       ['Versatile design','a minimal look and on-trend texture go with a business suit as well as everyday outfits.'],
+      ['NFC passport','a tag in the centre of the cardholder — tap your phone to open the authenticity check with the piece number.'],
       ['Packaging','cardholder, branded bag, sticker, business card and −15% off your next order.']],
   order:'Order', after_timer:'Opens when the timer ends', watch_tg:'Follow the drop on Telegram',
   note:'Ukraine: Nova Poshta, ₴150 prepayment · Europe: prepayment from ₴390',
@@ -754,8 +820,19 @@ var SPEC_ICONS = [
   '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M3 14h18"/>',
   '<path d="M12 3c4 3 6 6 6 9a6 6 0 0 1-12 0c0-3 2-6 6-9z"/>',
   '<path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/>',
+  '<path d="M6 8.5a8 8 0 0 1 0 7M9.5 6.5a12 12 0 0 1 0 11M13 4.5a16 16 0 0 1 0 15"/><circle cx="17.5" cy="12" r="1.6"/>',
   '<path d="M4 8h16l-1.5 12h-13z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/>'
 ];
+function nfcDemo(k){
+  var im = 'img/'+k+'-front.jpg?v=2';
+  return '<div class="nd" data-k="'+k+'" data-l="'+lang+'" aria-hidden="true"><img class="h" src="'+im+'" alt="">'+
+    '<span class="tag"><i></i><i></i></span>'+
+    '<div class="ph"><div class="scr">'+
+      '<div class="idle"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round"><path d="M6 8.5a8 8 0 0 1 0 7M9.5 6.5a12 12 0 0 1 0 11M13 4.5a16 16 0 0 1 0 15"/><circle cx="17.5" cy="12" r="1.6"/></svg><span>'+esc(T('nfc_idle'))+'</span></div>'+
+      '<div class="ok"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><b>'+esc(T('nfc_ok'))+'</b><img src="'+im+'" alt=""><small>№ 004 / 300</small></div>'+
+    '</div></div></div>';
+}
+function renderNfcBox(){ var b = $('#nfcBox'); if(!b) return; var o = b.querySelector('.nd'); if(o && o.dataset.l===lang) return; b.innerHTML = nfcDemo('red'); }
 function swatches(active, label){
   return '<div class="sw" role="group" aria-label="'+esc(label)+'">'+ORDER.map(function(k){
     return '<button type="button" data-c="'+k+'" aria-pressed="'+(k===active)+'" aria-label="'+esc(cname(k))+'"><span style="background:'+SW[k]+'"></span></button>';
@@ -772,6 +849,7 @@ function specsHTML(){
 function openProduct(k){ current = k; renderProduct(); openModal('pModal'); }
 function renderProduct(){
   var k = current, p = state.products[k], e = eff(p);
+  var oldNd = $('#pBody .nd'); if(oldNd && (oldNd.dataset.k!==k || oldNd.dataset.l!==lang)) oldNd = null;
   $('#pImg').src = 'img/'+k+'.jpg?v=2'; $('#pImg').alt = T('product')+', '+cname(k).toLowerCase();
   var btn;
   if(e==='in_stock') btn = '<button class="btn btn-silver" type="button" id="toOrder">'+T('order')+'</button>';
@@ -781,12 +859,14 @@ function renderProduct(){
     '<div><div class="label">BBC BRAND</div><h3 id="pTitle" style="margin-top:8px">'+T('product')+'<br>'+cname(k).toLowerCase()+'</h3></div>'+
     '<p class="desc">'+T('desc')+'</p>'+
     '<div><div class="label">'+T('color')+' · '+cname(k)+'</div>'+swatches(k, T('color'))+'</div>'+
+    '<div class="pnfc"><div class="label">'+T('nfc_eyebrow')+'</div><span id="ndSlot"></span><p class="note" style="margin:0">'+T('nfc_modal')+'</p></div>'+
     '<div class="stline">'+statusHTML(p)+'</div>'+
     (e==='drop' ? countdownHTML(p.drop_at) : '')+
     '<div class="bigprice">'+esc(priceText(p))+'</div>'+
     btn+
     '<p class="note">'+T('note')+'</p>'+
     specsHTML();
+  var slot = $('#ndSlot'); if(slot){ if(oldNd) slot.replaceWith(oldNd); else slot.outerHTML = nfcDemo(k); }
   $('#pBody').querySelectorAll('.sw button').forEach(function(b){ b.addEventListener('click', function(){ current = b.dataset.c; renderProduct(); }); });
   var o = $('#toOrder'); if(o) o.addEventListener('click', renderForm);
   tick();
@@ -990,6 +1070,7 @@ function applyLang(){
     if($('#m3d').classList.contains('open')) set3dColor(cur3d);
   }
   updateTrackBtn(); if($('#tModal').classList.contains('open')) renderTrack();
+  renderNfcBox();
 }
 $('#langBtn').addEventListener('click', function(){ lang = lang==='ru' ? 'en' : 'ru'; store('bbc_lang', lang); applyLang(); });
 
